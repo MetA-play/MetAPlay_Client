@@ -37,18 +37,23 @@ public class ObjectManager : MonoBehaviour
         GameObjectType Type = GetObjectTypeById(info.Id);
         if (Type == GameObjectType.Player)
         {
-            GameObject prefab = Resources.Load<GameObject>("Player");
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/Player");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
 
 
             if (myPlayer)
             {
-                //isMine Ȱ��ȭ
+                //isMine 활성화
             }
             else
             {
             }
 
+        }
+        else if(Type == GameObjectType.Room)
+        {
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/RoomObject");
+            GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
         }
 
     }
