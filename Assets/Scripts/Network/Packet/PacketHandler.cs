@@ -17,8 +17,11 @@ public class PacketHandler
     {
         ServerSession SS = session as ServerSession;
         S_CreateroomRes res = packet as S_CreateroomRes;
+        Room room =  ObjectManager.Instance.FindById(res.ObjectId).GetComponent<Room>();
+        room.Id = res.RoomId;
+
         // 천막 씬으로 이동
-        
+        Debug.Log("Room Create");
     }
     public static void S_JoinroomResHandler(PacketSession session, IMessage packet)
     {
@@ -35,6 +38,12 @@ public class PacketHandler
     public static void S_SpawnHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_Spawn spawn = packet as S_Spawn;
+
+        foreach (ObjectInfo obj in spawn.Objects)
+        {
+            ObjectManager.Instance.Add(obj);
+        }
     }
     public static void S_DespawnHandler(PacketSession session, IMessage packet)
     {
@@ -45,6 +54,10 @@ public class PacketHandler
         ServerSession SS = session as ServerSession;
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+    }
+    public static void S_UpdateGameStateResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
     }

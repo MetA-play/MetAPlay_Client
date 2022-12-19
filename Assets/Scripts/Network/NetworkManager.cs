@@ -39,9 +39,14 @@ public class NetworkManager : MonoBehaviour
     public void Init()
     {
         // DNS (Domain Name System)
-        string host = Dns.GetHostName();
+        /*string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
         IPAddress ipAddr = IPAddress.Parse("10.82.17.113");
+        IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);*/
+
+        string host = Dns.GetHostName();
+        IPHostEntry ipHost = Dns.GetHostEntry(host);
+        IPAddress ipAddr = ipHost.AddressList[0];
         IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
         Connector connector = new Connector();
