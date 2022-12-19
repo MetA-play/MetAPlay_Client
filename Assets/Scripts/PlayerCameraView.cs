@@ -38,7 +38,7 @@ public class PlayerCameraView : MonoBehaviour
         y_Rotation += mouseX;
         x_Rotation -= mouseY;
 
-        Player.eulerAngles = new Vector3(0, y_Rotation, 0.0f);
+        //Player.eulerAngles = new Vector3(0, y_Rotation, 0.0f);
         PlayerCam.transform.eulerAngles = new Vector3(x_Rotation, y_Rotation, 0.0f);
     }
 }
