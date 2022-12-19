@@ -6,4 +6,14 @@ using UnityEngine;
 public class Room : NetworkingObject
 {
     public int roomId;
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "PlayerDemo")
+        {
+            RoomManager.Instance.JoinRoom(roomId);
+        }   
+    }
+
 }

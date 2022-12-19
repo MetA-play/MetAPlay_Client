@@ -35,6 +35,12 @@ public class PacketHandler
     {
         ServerSession SS = session as ServerSession;
     }
+    /// <summary>
+    /// 2022. 12. 19. / Eunseong
+    /// 스폰 패킷이 오면 ObjectManager에서 Type을 구분해 맞는 프리팹 소환
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="packet"></param>
     public static void S_SpawnHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;

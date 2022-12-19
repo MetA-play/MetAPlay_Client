@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    void Start()
+
+    static RoomManager instance;
+    public static RoomManager Instance { get { return instance; } }
+
+
+    private void Awake()
     {
-        
+        if(instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// 2022. 12. 19.  / Eunseong
@@ -35,6 +39,18 @@ public class RoomManager : MonoBehaviour
     public void OnCreateRoom()
     {
         CreateRoom(new RoomSetting() { GameType = GameType.AvoidLog, MaxPlayer = 5, Name = "Test" });
+    }
 
+    /// <summary>
+    /// 2022. 12. 19. / Eunseong
+    /// 방 참가 요청을 서버에게 보내는 함수
+    /// </summary>
+    /// <param name="id"></param>
+    public void JoinRoom(int id)
+    {
+        C_JoinroomReq req = new C_JoinroomReq();
+        req.RoomId = id;
+        Debug.Log("JoinRoom Func");
+        NetworkManager.Instance.Send(req);
     }
 }
