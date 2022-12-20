@@ -77,31 +77,31 @@ public class PlayerCameraView : MonoBehaviour
     }
 
     /// <summary>
-    /// 2022.12.19 / LJ
+    /// 2022.12.20 / LJ
     /// 마우스 움직임 감지 및 카메라와 플레이어에 값 적용;
     /// </summary>
     void MouseHandler()
     {
-        float mouseX = Input.GetAxis("Mouse X") * x_RotationSpeed;
-        float mouseY = Input.GetAxis("Mouse Y") * y_RotationSpeed;
+        //float mouseX = Input.GetAxis("Mouse X") * x_RotationSpeed;
+        //float mouseY = Input.GetAxis("Mouse Y") * y_RotationSpeed;
 
-        y_Rotation += mouseX;
-        x_Rotation -= mouseY;
+        //y_Rotation += mouseX;
+        //x_Rotation -= mouseY;
 
-        Player.transform.rotation = Quaternion.Euler(0, y_Rotation, 0.0f);
-        playerCam.transform.rotation = Quaternion.Euler(x_Rotation, y_Rotation, 0.0f);
+        //Player.transform.rotation = Quaternion.Euler(0, y_Rotation, 0.0f);
+        //playerCam.transform.rotation = Quaternion.Euler(x_Rotation, y_Rotation, 0.0f);
 
-        //if (look.sqrMagnitude >= threshold && !LockCameraPosition)
-        //{
-        //    float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+        if (look.sqrMagnitude >= threshold && !LockCameraPosition)
+        {
+            float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-        //    targetYaw += look.x * deltaTimeMultiplier;
-        //    targetPitch += look.y * deltaTimeMultiplier;
-        //}
-        //targetYaw = ClampAngle(targetYaw, float.MinValue, float.MaxValue);
-        //targetPitch = ClampAngle(targetPitch, BottomClamp, TopClamp);
+            targetYaw += look.x * deltaTimeMultiplier;
+            targetPitch += look.y * deltaTimeMultiplier;
+        }
+        targetYaw = ClampAngle(targetYaw, float.MinValue, float.MaxValue);
+        targetPitch = ClampAngle(targetPitch, BottomClamp, TopClamp);
 
-        //playerCamTarget.transform.rotation = Quaternion.Euler(targetPitch + CameraAngleOverride, targetYaw, 0.0f);
+        playerCamTarget.transform.rotation = Quaternion.Euler(targetPitch + CameraAngleOverride, targetYaw, 0.0f);
 
     }
 
@@ -131,6 +131,11 @@ public class PlayerCameraView : MonoBehaviour
         Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
+    /// <summary>
+    /// 2022.12.20 / LJ
+    /// 앵글 범위 설정
+    /// </summary>
+    /// <returns></returns>
     private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
     {
         if (lfAngle < -360f) lfAngle += 360f;
