@@ -12,9 +12,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Player Movement Stat")]
-    [Range(0f, 100f)]
-    [SerializeField]
-    private float speed;
+    [Range(0f, 100f)] [SerializeField] private float speed;
+    CharacterController controller;
 
     private float movementX;
     private float movementY;
@@ -24,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private float targetRotation = 0f;
     [SerializeField] private float rotationVelocity;
     private float rotationTime = 0.12f;
+    private float verticalVelocity;
+
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
+        controller = GetComponent<CharacterController>();
     }
 
     void Start()
@@ -61,7 +63,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 2022.12.07 / LJ
+    /// 2022.12.20 / LJ
     /// 플레이어 이동 구현
     /// </summary>
     void Movement()
@@ -71,14 +73,17 @@ public class PlayerController : MonoBehaviour
 
         if (movement != Vector3.zero)
         {
-            Debug.Log(1);
             targetRotation = Mathf.Atan2(movementX, movementY) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationTime);
 
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
-
-        rb.velocity = movement * speed * Time.deltaTime;
+        if (!(movementX == 0 && movementY == 0))
+        {
+            Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
+            //rb.velocity = movement * speed * Time.deltaTime;
+            controller.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
+        }
     }
 }
