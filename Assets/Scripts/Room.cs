@@ -12,7 +12,7 @@ public class Room : NetworkingObject
     {
         if(collision.gameObject.name == "PlayerDemo")
         {
-            RoomManager.Instance.JoinRoom(roomId);
+            NetworkManager.Instance.JoinRoom(roomId);
         }   
     }
 

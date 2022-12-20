@@ -3,12 +3,14 @@ using Google.Protobuf.Protocol;
 using ServerCore;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PacketHandler
 {
     /// <summary>
-    /// 2022. 12. 19. / Eunseong
+    /// 2022. 12. 20. / Eunseong
     /// 방 생성 요청에 대해 응답이 왔을 때 실행되는 함수
     /// </summary>
     /// <param name="session"> 방 생성 요청을 응답한 세션</param>
@@ -20,16 +22,40 @@ public class PacketHandler
         Room room =  ObjectManager.Instance.FindById(res.ObjectId).GetComponent<Room>();
         room.Id = res.RoomId;
 
-        // 천막 씬으로 이동
+        NetworkManager.Instance.JoinedRoomId = res.RoomId;
+        // TODO 천막 씬으로 이동
+        SceneManager.LoadScene("GameroomScene");
         Debug.Log("Room Create");
     }
+
+    /// <summary>
+    /// 2022. 12. 20. / Eunseong
+    /// 방 참가 요청에 대해 응답이 왔을 때 실행 되는 함수
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="packet"></param>
     public static void S_JoinroomResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_JoinroomRes res = packet as S_JoinroomRes;
+        
+        NetworkManager.Instance.JoinedRoomId = res.RoomId;
+
     }
+    /// <summary>
+    /// 2022. 12. 20. / Eunseong
+    /// 다른 Room에 들어갔을 때 서버에서 Enter허가가 오면 실행되는 함수
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="packet"></param>
     public static void S_EnterGameHandler(PacketSession session, IMessage packet)
     {   
         ServerSession SS = session as ServerSession;
+        S_EnterGame enter = packet as S_EnterGame;
+
+        ObjectManager.Instance.Add(enter.Player, true);
+        Debug.Log("Mine Generate");
+
     }
     public static void S_LeaveGameHandler(PacketSession session, IMessage packet)
     {

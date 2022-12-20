@@ -14,11 +14,8 @@ public class NetworkManager : MonoBehaviour
     public static NetworkManager Instance { get { return _instance; } }
     ServerSession _session = new ServerSession();
 
-    List<RoomInfo> roomList  = new List<RoomInfo>();
-    public List<RoomInfo> RoomList
-    {
-        get { return roomList;} 
-    }
+
+    public int JoinedRoomId { get; set; } 
 
     private void Start()
     {
@@ -67,6 +64,12 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 2022. 12. 19.  / Eunseong
+    /// 방 생성 요청을 서버에게 보내는 함수
+    /// </summary>
+    /// <param name="setting"></param>
+
     public void CreateRoom(RoomSetting setting)
     {
         C_CreateroomReq req = new C_CreateroomReq();
@@ -74,6 +77,12 @@ public class NetworkManager : MonoBehaviour
         _session.Send(req);
     }
 
+
+    /// <summary>
+    /// 2022. 12. 19. / Eunseong
+    /// 방 참가 요청을 서버에게 보내는 함수
+    /// </summary>
+    /// <param name="id"></param>
     public void JoinRoom(int Id)
     {
         C_JoinroomReq req = new C_JoinroomReq();
@@ -81,9 +90,5 @@ public class NetworkManager : MonoBehaviour
         _session.Send(req);
     }
 
-    public void RoomListUpdate(List<RoomInfo> infos)
-    {
-        roomList = infos;
-    }
 
 }
