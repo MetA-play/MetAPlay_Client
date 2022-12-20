@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     private float movementY;
 
     [Header("Player Rotation")]
-    private Camera cam;
-    [SerializeField]private float targetRotation = 0f;
+    [SerializeField] private Camera cam;
+    [SerializeField] private float targetRotation = 0f;
     [SerializeField] private float rotationVelocity;
     private float rotationTime = 0.12f;
     private float verticalVelocity;
@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        cam = Camera.main;
+        if (cam == null)
+            cam = Camera.main;
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
