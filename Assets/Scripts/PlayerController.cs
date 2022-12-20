@@ -1,3 +1,4 @@
+using Define;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
+    private PlayerStateManager playerStateManager;
 
     [Header("Player Movement Stat")]
     [Range(0f, 100f)] [SerializeField] private float speed;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
         controller = GetComponent<CharacterController>();
+        playerStateManager = GetComponent<PlayerStateManager>();
     }
 
     void Start()
@@ -81,9 +84,18 @@ public class PlayerController : MonoBehaviour
 
         if (!(movementX == 0 && movementY == 0))
         {
+            // StateManager
+            playerStateManager.State = PlayerState.Move;
+
             Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
             //rb.velocity = movement * speed * Time.deltaTime;
             controller.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
+        }
+        else
+        {
+            //StateManager
+            if (playerStateManager.State != PlayerState.AFK)
+                playerStateManager.State = PlayerState.Idle;
         }
     }
 }
