@@ -629,15 +629,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c6e33640463334aacf1a7a63c9bed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  jump: 0
+  speed: 5
+  jump: 1
   ground:
     serializedVersion: 2
     m_Bits: 1
+  jumpHeight: 3
+  jumpTimeout: 0.07
   cam: {fileID: 963194227}
   targetRotation: 0
   rotationVelocity: 0
   gravity: -9.81
+  verticalVelocity: 0
 --- !u!114 &782810589
 MonoBehaviour:
   m_ObjectHideFlags: 0
