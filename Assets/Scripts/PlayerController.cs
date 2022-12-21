@@ -10,7 +10,6 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rb;
     private PlayerStateManager playerStateManager;
 
     [Header("Player Movement Stat")]
@@ -32,10 +31,6 @@ public class PlayerController : MonoBehaviour
     {
         if (cam == null)
             cam = Camera.main;
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
         controller = GetComponent<CharacterController>();
         playerStateManager = GetComponent<PlayerStateManager>();
     }
