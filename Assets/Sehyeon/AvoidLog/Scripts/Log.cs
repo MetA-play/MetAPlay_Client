@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,8 +20,9 @@ public class Log : MonoBehaviour
         {
             if (collision.gameObject.TryGetComponent(out PlayerController pc))
             {
-                // 넉백 처리
-                
+                C_Move movePacket = new C_Move();
+                movePacket.State = ObjectState.Stun;
+                NetworkManager.Instance.Send(movePacket);
             }
         }
     }
