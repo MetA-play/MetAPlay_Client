@@ -1,19 +1,23 @@
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Room : NetworkingObject
 {
     public int roomId;
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.name == "PlayerDemo")
+        Debug.Log("Room Collision");
+        if (other.gameObject.CompareTag("Player"))
         {
-            NetworkManager.Instance.JoinRoom(roomId);
-        }   
+            NetworkManager.Instance.JoinedRoomId = roomId;
+            SceneManager.LoadScene("GameroomScene");
+        }
     }
 
 }

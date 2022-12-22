@@ -39,7 +39,8 @@ public class ObjectManager : MonoBehaviour
             GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
 
-            _objects.Add(info.Id, obj);     
+            _objects.Add(info.Id, obj);
+            //obj.GetComponent<NetworkingObject>().Id = info.Id;
 
             if (myPlayer)
             {
@@ -48,6 +49,9 @@ public class ObjectManager : MonoBehaviour
             }
             else
             {
+                obj.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+                Destroy(obj.GetComponent<PlayerController>());
+                Destroy(obj.GetComponent<PlayerCameraView>());
             }
 
         }
@@ -55,6 +59,10 @@ public class ObjectManager : MonoBehaviour
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/RoomObject");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
+            Room room= obj.GetComponent<Room>();
+
+            room.roomId = (int)info.Transform.Scale.Y;
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
             _objects.Add(info.Id, obj);
 
         }
@@ -69,6 +77,17 @@ public class ObjectManager : MonoBehaviour
             return obj;
 
         return null;
+    }
+
+    public void RemoveById(int Id)
+    {
+
+        GameObject obj = null;
+
+        if (_objects.Remove(Id, out obj) == true)
+        {
+            Destroy(_objects[Id]);
+        }
     }
 
 }

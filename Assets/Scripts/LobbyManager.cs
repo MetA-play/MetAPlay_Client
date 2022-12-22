@@ -34,5 +34,8 @@ public class LobbyManager : MonoBehaviour
         NetworkManager.Instance.CreateRoom(new RoomSetting() { GameType = GameType.AvoidLog, MaxPlayer = 5, Name = "Test" });
     }
 
-    
+    public void OnJoinRoom()
+    {
+        NetworkManager.Instance.JoinRoom(1);
+    }
 }

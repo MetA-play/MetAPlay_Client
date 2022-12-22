@@ -38,8 +38,6 @@ public class PacketHandler
     {
         ServerSession SS = session as ServerSession;
         S_JoinroomRes res = packet as S_JoinroomRes;
-        
-        NetworkManager.Instance.JoinedRoomId = res.RoomId;
 
     }
     /// <summary>
@@ -77,9 +75,21 @@ public class PacketHandler
             ObjectManager.Instance.Add(obj);
         }
     }
+    /// <summary>
+    /// 2022. 12. 20. / Eunseong
+    /// 서버에서 디스폰할 객체를 패킷으로 전달받으면 실행되는 함수
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="packet"></param>
     public static void S_DespawnHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_Despawn despawn= packet as S_Despawn;
+
+        foreach (int id in despawn.ObjectId)
+        {
+            ObjectManager.Instance.RemoveById(id);
+        }
     }
     public static void S_MoveHandler(PacketSession session, IMessage packet)
     {
