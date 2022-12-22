@@ -42,7 +42,8 @@ public class RoomManager : MonoBehaviour
     }
     void Start()
     {
-        NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoomId);
+        NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoom.Id);
+        Setting = NetworkManager.Instance.JoinedRoom.Setting;
     }
 
     void Update()

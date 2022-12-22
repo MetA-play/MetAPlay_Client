@@ -13,9 +13,9 @@ public class NetworkManager : MonoBehaviour
     static NetworkManager _instance;
     public static NetworkManager Instance { get { return _instance; } }
     ServerSession _session = new ServerSession();
-    
 
-    public int JoinedRoomId { get; set; } 
+
+    public RoomInfo JoinedRoom { get; set; } = new RoomInfo();
 
     private void Start()
     {

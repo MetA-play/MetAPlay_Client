@@ -54,14 +54,13 @@ public class ObjectManager : MonoBehaviour
                 Destroy(obj.GetComponent<PlayerCameraView>());
             }
 
+
         }
         else if(Type == GameObjectType.Room)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/RoomObject");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
-            Room room= obj.GetComponent<Room>();
 
-            room.roomId = (int)info.Transform.Scale.Y;
             obj.GetComponent<NetworkingObject>().Id = info.Id;
             _objects.Add(info.Id, obj);
 

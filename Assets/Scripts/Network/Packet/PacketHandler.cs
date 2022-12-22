@@ -10,19 +10,19 @@ using UnityEngine.SceneManagement;
 public class PacketHandler
 {
     /// <summary>
-    /// 2022. 12. 20. / Eunseong
+    /// 2022. 12. 22. / Eunseong
     /// 방 생성 요청에 대해 응답이 왔을 때 실행되는 함수
     /// </summary>
     /// <param name="session"> 방 생성 요청을 응답한 세션</param>
     /// <param name="packet"> 받은 메세지</param>
-    public static void S_CreateroomResHandler(PacketSession session, IMessage packet)
+    public static void S_CreateRoomResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
         S_CreateRoomRes res = packet as S_CreateRoomRes;
         Room room =  ObjectManager.Instance.FindById(res.ObjectId).GetComponent<Room>();
-        room.Id = res.RoomId;
+        room.Info = res.Info;
 
-        NetworkManager.Instance.JoinedRoomId = res.RoomId;
+        NetworkManager.Instance.JoinedRoom = res.Info;
         // TODO 천막 씬으로 이동
         SceneManager.LoadScene("GameroomScene");
         Debug.Log("Room Create");
@@ -34,7 +34,7 @@ public class PacketHandler
     /// </summary>
     /// <param name="session"></param>
     /// <param name="packet"></param>
-    public static void S_JoinroomResHandler(PacketSession session, IMessage packet)
+    public static void S_JoinRoomResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
         S_JoinRoomRes res = packet as S_JoinRoomRes;
