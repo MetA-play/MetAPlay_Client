@@ -33,8 +33,17 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] [Range(0f,6000f)] private float SetTimer = 300f;
     [SerializeField] private bool isAFK = false;
 
+    [Header("Player Animator")]
+    [SerializeField] private Animator anim;
+
     [Header("Debugger")]
     public bool timerLog;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void Start()
     {
         if (State == PlayerState.Idle)
@@ -71,7 +80,7 @@ public class PlayerStateManager : MonoBehaviour
                 // 상태 전환
                 State = PlayerState.AFK;
                 // 잠수 전용 외형으로 변경 및 애니메이션 실행
-
+                anim.SetBool("AFK", true);
                 return;
             }
             Invoke("AFKTimer", Time.deltaTime);
@@ -85,7 +94,8 @@ public class PlayerStateManager : MonoBehaviour
     /// </summary>
     void PlayerMoved()
     {
-        isAFK = false;   
+        isAFK = false;
         // 외형 변환 및 애니메이션 실행
+        anim.SetBool("AFK", false);
     }
 }

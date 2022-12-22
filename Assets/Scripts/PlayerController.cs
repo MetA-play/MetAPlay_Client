@@ -36,10 +36,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalVelocity;
 
 
+    [Header("Player Animation")]
+    [SerializeField] private Animator anim;
+
     private void Awake()
     {
         if (cam == null)
             cam = Camera.main;
+        anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         playerStateManager = GetComponent<PlayerStateManager>();
     }
@@ -95,6 +99,9 @@ public class PlayerController : MonoBehaviour
             // StateManager
             playerStateManager.State = PlayerState.Move;
 
+            // Animation
+            anim.SetBool("Move", true);
+
             targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
             //rb.velocity = movement * speed * Time.deltaTime;
         }
@@ -102,7 +109,11 @@ public class PlayerController : MonoBehaviour
         {
             //StateManager
             if (playerStateManager.State != PlayerState.AFK)
+            {
                 playerStateManager.State = PlayerState.Idle;
+                // Animation
+                anim.SetBool("Move", false);
+            }
         }
 
         if (jump) // 중력
@@ -152,6 +163,9 @@ public class PlayerController : MonoBehaviour
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         jumpTimer = 0f;
         JumpTimerOut();
+        playerStateManager.State = PlayerState.Move;
+        // Animation
+        anim.SetTrigger("Jump");
     }
 
     void JumpTimerOut()
