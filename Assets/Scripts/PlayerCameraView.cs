@@ -101,7 +101,7 @@ public class PlayerCameraView : MonoBehaviour
         targetYaw = ClampAngle(targetYaw, float.MinValue, float.MaxValue);
         targetPitch = ClampAngle(targetPitch, BottomClamp, TopClamp);
 
-        playerCamTarget.transform.rotation = Quaternion.Euler(targetPitch + CameraAngleOverride, targetYaw, 0.0f);
+        playerCamTarget.transform.rotation = Quaternion.Euler(-(targetPitch + CameraAngleOverride), targetYaw, 0.0f);
 
     }
 
