@@ -18,7 +18,7 @@ public class PacketHandler
     public static void S_CreateroomResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
-        S_CreateroomRes res = packet as S_CreateroomRes;
+        S_CreateRoomRes res = packet as S_CreateRoomRes;
         Room room =  ObjectManager.Instance.FindById(res.ObjectId).GetComponent<Room>();
         room.Id = res.RoomId;
 
@@ -37,7 +37,7 @@ public class PacketHandler
     public static void S_JoinroomResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
-        S_JoinroomRes res = packet as S_JoinroomRes;
+        S_JoinRoomRes res = packet as S_JoinRoomRes;
 
     }
     /// <summary>
@@ -102,5 +102,10 @@ public class PacketHandler
     public static void S_UpdateGameStateResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
-    }
+        S_UpdateGameStateRes res = packet as S_UpdateGameStateRes;
+
+        Debug.Log("RECV STATE PACKET");
+        RoomManager.Instance.State = res.State;
+
+    }   
 }

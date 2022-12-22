@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public class Room : NetworkingObject
 {
     public int roomId;
-
-
+    public RoomSetting Setting;
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Room Collision");
@@ -19,5 +18,6 @@ public class Room : NetworkingObject
             SceneManager.LoadScene("GameroomScene");
         }
     }
+
 
 }

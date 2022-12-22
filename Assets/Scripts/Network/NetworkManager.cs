@@ -13,7 +13,7 @@ public class NetworkManager : MonoBehaviour
     static NetworkManager _instance;
     public static NetworkManager Instance { get { return _instance; } }
     ServerSession _session = new ServerSession();
-
+    
 
     public int JoinedRoomId { get; set; } 
 
@@ -72,7 +72,7 @@ public class NetworkManager : MonoBehaviour
 
     public void CreateRoom(RoomSetting setting)
     {
-        C_CreateroomReq req = new C_CreateroomReq();
+        C_CreateRoomReq req = new C_CreateRoomReq();
         req.Setting = setting;
         _session.Send(req);
     }
@@ -85,7 +85,7 @@ public class NetworkManager : MonoBehaviour
     /// <param name="id"></param>
     public void JoinRoom(int Id)
     {
-        C_JoinroomReq req = new C_JoinroomReq();
+        C_JoinRoomReq req = new C_JoinRoomReq();
         req.RoomId = Id;
         _session.Send(req);
     }
