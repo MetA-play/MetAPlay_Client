@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Movement Stat")]
     [Range(0f, 100f)] [SerializeField] private float speed;
     CharacterController controller;
-    [SerializeField] private bool jump;
+    [SerializeField] private bool jump; // 점프 중이라면 true
     [SerializeField] private LayerMask ground;
     [SerializeField] [Range(0f, 10f)] private float jumpHeight;
     [SerializeField] [Range(0f, 10f)] private float jumpTimeout;
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) onJump();
         if (IsCheckGrounded()) jump = false;
+        else jump = true;
 
     }
 
@@ -168,6 +169,10 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
+    /// <summary>
+    ///  2022.12.21 / LJ
+    ///  점프 시간 관리
+    /// </summary>
     void JumpTimerOut()
     {
         jumpTimer += Time.deltaTime;
