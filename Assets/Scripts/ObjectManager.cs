@@ -33,6 +33,7 @@ public class ObjectManager : MonoBehaviour
 
     public void Add(ObjectInfo info, bool myPlayer = false)
     {
+        Debug.Log("애드");
         GameObjectType Type = GetObjectTypeById(info.Id);
         if (Type == GameObjectType.Player)
         {

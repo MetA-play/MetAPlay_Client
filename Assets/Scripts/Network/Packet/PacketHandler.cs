@@ -50,10 +50,9 @@ public class PacketHandler
     {   
         ServerSession SS = session as ServerSession;
         S_EnterGame enter = packet as S_EnterGame;
-
+        
         ObjectManager.Instance.Add(enter.Player, true);
         Debug.Log("Mine Generate");
-
     }
     public static void S_LeaveGameHandler(PacketSession session, IMessage packet)
     {
@@ -94,6 +93,9 @@ public class PacketHandler
     public static void S_MoveHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_Move movePacket = packet as S_Move;
+
+        
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
