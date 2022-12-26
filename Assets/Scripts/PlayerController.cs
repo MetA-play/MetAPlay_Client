@@ -66,19 +66,19 @@ public class PlayerController : NetworkingObject
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) onJump();
-        if (IsCheckGrounded()) jump = false;
-        else jump = true;
-
-
         if (isMine)
         {
             InputFunc();
+            if (Input.GetKeyDown(KeyCode.Space)) onJump();
+
         }
         if (!isMine)
         {
             SyncPos();
         }
+
+        if (IsCheckGrounded()) jump = false;
+        else jump = true;
     }
 
     private void FixedUpdate()
@@ -89,17 +89,29 @@ public class PlayerController : NetworkingObject
 
     void InputFunc()
     {
-
+        // MOVE
         int XInput = (movementX > 0) ? 1 : (movementX < 0) ? 2 : 0;
         int YInput = (movementY > 0) ? 1 : (movementY < 0) ? 2 : 0;
         int x = XInput << 27;
         int y = YInput << 23;
+        int jump;
+
         inputFlag = 0;
         inputFlag = inputFlag | x;
         inputFlag = inputFlag | y;
         bool isDiff = prev_inputFlag != inputFlag || rotY != cam.transform.eulerAngles.y;
-        if (isDiff)
-            Debug.Log("Difficult:  " + isDiff);
+        
+        
+        // JUMP
+        if (Input.GetKeyDown(KeyCode.Space))
+        { 
+            jump = 1 << 22;
+            isDiff = true;
+        }
+        else
+            jump = 0;
+
+        inputFlag = inputFlag | jump;
 
         prev_inputFlag = inputFlag;
         rotY = cam.transform.eulerAngles.y;
@@ -235,8 +247,10 @@ public class PlayerController : NetworkingObject
 
         int x = ((inputFlag >> 27) == 1) ? 1: ((inputFlag >> 27) == 2) ? -1 : 0;
         int y = ((inputFlag >> 23 & 0b1111) == 1) ? 1: ((inputFlag >> 23 & 0b1111) == 2) ? -1 : 0;
-        //Debug.Log($"{x}  {y}   {rotY}");
         Movement(x, y, rotY);
+        int jump = (inputFlag >> 22 & 0b1);
+        if (jump > 0)
+            onJump();
     }
 }
 
