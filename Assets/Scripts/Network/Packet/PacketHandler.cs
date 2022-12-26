@@ -94,6 +94,25 @@ public class PacketHandler
     public static void S_MoveHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_Move move = packet as S_Move;
+
+        if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
+
+        PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
+
+        if (player == null)
+        {
+            Debug.Log("player not found");
+            return;
+        }
+        if(move.Transform == null)
+        {
+            player.inputFlag = move.InputFlag;
+        }
+        else
+        {
+            player.transform.position = new Vector3(move.Transform.Pos.X, move.Transform.Pos.Y, move.Transform.Pos.Z);
+        }
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
