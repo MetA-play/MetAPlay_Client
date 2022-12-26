@@ -1,14 +1,17 @@
+
 using Define;
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 /// <summary>
 /// 2022.12.05 / LJ
 /// 플레이어 조작 관련 스크립트
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkingObject
 {
     private PlayerStateManager playerStateManager;
 
@@ -20,6 +23,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(0f, 10f)] private float jumpHeight;
     [SerializeField] [Range(0f, 10f)] private float jumpTimeout;
     private float jumpTimer;
+
+    private Rigidbody rb;
+
+    [Header("Player Movement Stat")]
+    [Range(0f, 100f)]
+    [SerializeField]
+
 
     private float movementX;
     private float movementY;
@@ -39,6 +49,9 @@ public class PlayerController : MonoBehaviour
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
 
+
+    int prev_inputFlag;
+    int inputFlag;
     private void Awake()
     {
         if (cam == null)
@@ -59,11 +72,47 @@ public class PlayerController : MonoBehaviour
         if (IsCheckGrounded()) jump = false;
         else jump = true;
 
+
+        if (isMine)
+        {
+            InputFunc();
+        }
+        if (!isMine)
+        {
+            SyncPos();
+        }
     }
 
     private void FixedUpdate()
     {
-        Movement();
+        if(isMine)
+            Movement();
+    }
+
+    void InputFunc()
+    {
+
+        int XInput = (movementX > 0) ? 1 : (movementX <0) ? 2 : 0;
+        int YInput = (movementY > 0) ? 1 : (movementY <0) ? 2 : 0;
+        int x = XInput << 27;
+        int y = YInput << 23;
+
+        inputFlag = 0;
+        inputFlag = inputFlag | x;
+        inputFlag = inputFlag | y;
+        bool isDiff = prev_inputFlag != inputFlag;
+        if(isDiff)
+            Debug.Log("Difficult:  " + isDiff);
+
+        prev_inputFlag = inputFlag;
+        if (isDiff)
+        {
+            C_Move move = new C_Move();
+            move.Transform = null;
+            move.InputFlag = inputFlag;
+
+            NetworkManager.Instance.Send(move);
+        }
     }
 
     /// <summary>
@@ -78,13 +127,12 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 2022.12.20 / LJ
+    /// 2022.12.07 / LJ??
     /// 플레이어 이동 구현
     /// </summary>
     void Movement()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY).normalized;
-
+        Vector3 movement = new Vector3(movementX,0,movementY);
         Vector3 targetDirection = Vector3.zero;
 
         if (movement != Vector3.zero)
@@ -184,4 +232,16 @@ public class PlayerController : MonoBehaviour
         jump = true;
         return;
     }
+
+    void SyncPos()
+    {
+
+        int x = ((inputFlag >> 27) == 1) ? 1: ((inputFlag >> 27) == 2) ? -1 : 0;
+        int y = ((inputFlag >> 23 & 0b1111) == 1) ? 1: ((inputFlag >> 23 & 0b1111) == 2) ? -1 : 0;
+        rb.velocity = new Vector3(x,0,y).normalized * speed * Time.deltaTime;
+        Debug.Log("Y:  " + (inputFlag >> 23 & 0b1111));
+        Debug.Log($"{x} {y}");
+    }
 }
+
+
