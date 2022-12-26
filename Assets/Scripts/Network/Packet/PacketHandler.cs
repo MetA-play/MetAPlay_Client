@@ -106,7 +106,7 @@ public class PacketHandler
             return;
         }
         
-        
+        // 만약 inputFlag를 사용한다면
         if(!move.IsSync)
         {
             player.inputFlag = move.InputFlag;

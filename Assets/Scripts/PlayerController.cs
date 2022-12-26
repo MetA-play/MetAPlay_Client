@@ -87,6 +87,10 @@ public class PlayerController : NetworkingObject
             Movement(movementX,movementY, cam.transform.eulerAngles.y);
     }
 
+    /// <summary>
+    /// 2022. 12. 26. / 은성
+    /// 플레이어의 input 값을 받아 inputFlag에 비트단위로 넣어 input값이 달라졌을 시 서버에게 input값을 보냄
+    /// </summary>
     void InputFunc()
     {
         // MOVE
@@ -137,8 +141,9 @@ public class PlayerController : NetworkingObject
     }
 
     /// <summary>
-    /// 2022.12.07 / LJ??
+    /// 2022.12.26 / 은성
     /// 플레이어 이동 구현
+    /// 값을 받아와 이동하도록 구현
     /// </summary>
     void Movement(float x, float z,float rotY)
     {
@@ -242,6 +247,10 @@ public class PlayerController : NetworkingObject
         return;
     }
 
+    /// <summary>
+    /// 2022. 12. 26. / 은성
+    /// 다른 클라의 캐릭터들의 포지션을 싱크를 맞추는 함수
+    /// </summary>
     void SyncPos()
     {
 
