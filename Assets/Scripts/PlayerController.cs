@@ -26,11 +26,6 @@ public class PlayerController : NetworkingObject
 
     private Rigidbody rb;
 
-    [Header("Player Movement Stat")]
-    [Range(0f, 100f)]
-    [SerializeField]
-
-
     private float movementX;
     private float movementY;
 

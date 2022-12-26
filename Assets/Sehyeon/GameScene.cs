@@ -7,7 +7,7 @@ public class GameScene : MonoBehaviour
 {
     private void Start()
     {
-        C_JoinroomReq req = new C_JoinroomReq() { RoomId = 1 };
+        C_JoinRoomReq req = new C_JoinRoomReq() { RoomId = 1 };
 
 
     }
