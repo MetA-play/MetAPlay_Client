@@ -52,7 +52,7 @@ public class PlayerStateManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($":: Player State -> {State}");
+        //Debug.Log($":: Player State -> {State}");
     }
 
     /// <summary>

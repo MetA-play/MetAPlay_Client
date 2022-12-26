@@ -26,9 +26,6 @@ public class PlayerController : NetworkingObject
 
     private Rigidbody rb;
 
-    [Header("Player Movement Stat")]
-    [Range(0f, 100f)]
-    [SerializeField]
 
 
     private float movementX;
@@ -52,6 +49,7 @@ public class PlayerController : NetworkingObject
 
     int prev_inputFlag;
     public int inputFlag;
+    public float rotY;
     private void Awake()
     {
         if (cam == null)
@@ -61,9 +59,9 @@ public class PlayerController : NetworkingObject
         playerStateManager = GetComponent<PlayerStateManager>();
     }
 
-    void Start()
+    public override void Start()
     {
-        
+        base.Start();
     }
 
     void Update()
@@ -86,29 +84,29 @@ public class PlayerController : NetworkingObject
     private void FixedUpdate()
     {
         if(isMine)
-            Movement();
+            Movement(movementX,movementY, cam.transform.eulerAngles.y);
     }
 
     void InputFunc()
     {
 
-        int XInput = (movementX > 0) ? 1 : (movementX <0) ? 2 : 0;
-        int YInput = (movementY > 0) ? 1 : (movementY <0) ? 2 : 0;
+        int XInput = (movementX > 0) ? 1 : (movementX < 0) ? 2 : 0;
+        int YInput = (movementY > 0) ? 1 : (movementY < 0) ? 2 : 0;
         int x = XInput << 27;
         int y = YInput << 23;
-
         inputFlag = 0;
         inputFlag = inputFlag | x;
         inputFlag = inputFlag | y;
-        bool isDiff = prev_inputFlag != inputFlag;
-        if(isDiff)
+        bool isDiff = prev_inputFlag != inputFlag || rotY != cam.transform.eulerAngles.y;
+        if (isDiff)
             Debug.Log("Difficult:  " + isDiff);
 
         prev_inputFlag = inputFlag;
+        rotY = cam.transform.eulerAngles.y;
         if (isDiff)
         {
             C_Move move = new C_Move();
-            move.Transform = null;
+            move.Transform = new TransformInfo() { Rot = new Vector() { Y = cam.transform.eulerAngles.y } };
             move.InputFlag = inputFlag;
 
             NetworkManager.Instance.Send(move);
@@ -130,20 +128,20 @@ public class PlayerController : NetworkingObject
     /// 2022.12.07 / LJ??
     /// 플레이어 이동 구현
     /// </summary>
-    void Movement()
+    void Movement(float x, float z,float rotY)
     {
-        Vector3 movement = new Vector3(movementX,0,movementY);
+        Vector3 movement = new Vector3(x,0,z);
         Vector3 targetDirection = Vector3.zero;
 
         if (movement != Vector3.zero)
         {
-            targetRotation = Mathf.Atan2(movementX, movementY) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+            targetRotation = Mathf.Atan2(x, z) * Mathf.Rad2Deg + rotY;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationTime);
 
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
-        if ((!(movementX == 0 && movementY == 0)))
+        if ((!(x == 0 && z == 0)))
         {
             // StateManager
             playerStateManager.State = PlayerState.Move;
@@ -152,7 +150,6 @@ public class PlayerController : NetworkingObject
             anim.SetBool("Move", true);
 
             targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
-            //rb.velocity = movement * speed * Time.deltaTime;
         }
         else
         {
@@ -238,9 +235,8 @@ public class PlayerController : NetworkingObject
 
         int x = ((inputFlag >> 27) == 1) ? 1: ((inputFlag >> 27) == 2) ? -1 : 0;
         int y = ((inputFlag >> 23 & 0b1111) == 1) ? 1: ((inputFlag >> 23 & 0b1111) == 2) ? -1 : 0;
-        rb.velocity = new Vector3(x,0,y).normalized * speed * Time.deltaTime;
-        Debug.Log("Y:  " + (inputFlag >> 23 & 0b1111));
-        Debug.Log($"{x} {y}");
+        //Debug.Log($"{x}  {y}   {rotY}");
+        Movement(x, y, rotY);
     }
 }
 
