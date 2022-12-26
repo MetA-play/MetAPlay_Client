@@ -105,9 +105,12 @@ public class PacketHandler
             Debug.Log("player not found");
             return;
         }
-        if(move.Transform == null)
+        
+        // 만약 inputFlag를 사용한다면
+        if(!move.IsSync)
         {
             player.inputFlag = move.InputFlag;
+            player.rotY = move.Transform.Rot.Y;
         }
         else
         {
