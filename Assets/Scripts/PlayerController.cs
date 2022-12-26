@@ -27,7 +27,6 @@ public class PlayerController : NetworkingObject
     private Rigidbody rb;
 
 
-
     private float movementX;
     private float movementY;
 
@@ -50,6 +49,7 @@ public class PlayerController : NetworkingObject
     int prev_inputFlag;
     public int inputFlag;
     public float rotY;
+    
     private void Awake()
     {
         if (cam == null)
