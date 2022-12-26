@@ -51,7 +51,7 @@ public class PlayerController : NetworkingObject
 
 
     int prev_inputFlag;
-    int inputFlag;
+    public int inputFlag;
     private void Awake()
     {
         if (cam == null)
