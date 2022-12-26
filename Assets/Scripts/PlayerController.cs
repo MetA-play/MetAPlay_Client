@@ -1,4 +1,5 @@
 
+using Define;
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,6 @@ public class PlayerController : NetworkingObject
     [Header("Player Movement Stat")]
     [Range(0f, 100f)]
     [SerializeField]
-    private float speed;
 
 
     private float movementX;
@@ -49,6 +49,9 @@ public class PlayerController : NetworkingObject
     [Header("Player Animation")]
     [SerializeField] private Animator anim;
 
+
+    int prev_inputFlag;
+    int inputFlag;
     private void Awake()
     {
         if (cam == null)
@@ -129,7 +132,7 @@ public class PlayerController : NetworkingObject
     /// </summary>
     void Movement()
     {
-
+        Vector3 movement = new Vector3(movementX,0,movementY);
         Vector3 targetDirection = Vector3.zero;
 
         if (movement != Vector3.zero)
