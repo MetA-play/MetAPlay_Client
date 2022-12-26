@@ -2,6 +2,7 @@ using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ObjectManager : MonoBehaviour
 {
@@ -10,12 +11,12 @@ public class ObjectManager : MonoBehaviour
 
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 
-    
+    public PlayerController MyPlayer { get; set; }
 
     public static GameObjectType GetObjectTypeById(int id)
     {
         int type = (id >> 24) & 0x7F;
-        return (GameObjectType)type;
+        return (GameObjectType)type;    
     }
 
 
@@ -41,29 +42,29 @@ public class ObjectManager : MonoBehaviour
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
 
             _objects.Add(info.Id, obj);
-            //obj.GetComponent<NetworkingObject>().Id = info.Id;
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
 
             if (myPlayer)
-            {
+            {   
                 // MyPlayer 대입
+                MyPlayer = obj.GetComponent<PlayerController>();
+                MyPlayer.isMine = true;
                 //isMine 활성화
             }
             else
             {
                 obj.GetComponentInChildren<Camera>().gameObject.SetActive(false);
-                Destroy(obj.GetComponent<PlayerController>());
+                Destroy(obj.GetComponent<PlayerInput>());
                 Destroy(obj.GetComponent<PlayerCameraView>());
             }
+
 
         }
         else if(Type == GameObjectType.Room)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/RoomObject");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
-            Room room= obj.GetComponent<Room>();
 
-            room.roomId = (int)info.Transform.Scale.Y;
-            obj.GetComponent<NetworkingObject>().Id = info.Id;
             _objects.Add(info.Id, obj);
 
         }

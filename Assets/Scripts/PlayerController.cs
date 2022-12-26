@@ -1,26 +1,35 @@
-using Define;
+
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 /// <summary>
 /// 2022.12.05 / LJ
 /// 플레이어 조작 관련 스크립트
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkingObject
 {
-    private Rigidbody rb;
     private PlayerStateManager playerStateManager;
 
     [Header("Player Movement Stat")]
     [Range(0f, 100f)] [SerializeField] private float speed;
     CharacterController controller;
-    [SerializeField] private bool jump;
+    [SerializeField] private bool jump; // 점프 중이라면 true
     [SerializeField] private LayerMask ground;
     [SerializeField] [Range(0f, 10f)] private float jumpHeight;
     [SerializeField] [Range(0f, 10f)] private float jumpTimeout;
     private float jumpTimer;
+
+    private Rigidbody rb;
+
+    [Header("Player Movement Stat")]
+    [Range(0f, 100f)]
+    [SerializeField]
+    private float speed;
+
 
     private float movementX;
     private float movementY;
@@ -37,14 +46,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalVelocity;
 
 
+    [Header("Player Animation")]
+    [SerializeField] private Animator anim;
+
     private void Awake()
     {
         if (cam == null)
             cam = Camera.main;
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
+        anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         playerStateManager = GetComponent<PlayerStateManager>();
     }
@@ -58,12 +67,49 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) onJump();
         if (IsCheckGrounded()) jump = false;
+        else jump = true;
 
+
+        if (isMine)
+        {
+            InputFunc();
+        }
+        if (!isMine)
+        {
+            SyncPos();
+        }
     }
 
     private void FixedUpdate()
     {
-        Movement();
+        if(isMine)
+            Movement();
+    }
+
+    void InputFunc()
+    {
+
+        int XInput = (movementX > 0) ? 1 : (movementX <0) ? 2 : 0;
+        int YInput = (movementY > 0) ? 1 : (movementY <0) ? 2 : 0;
+        int x = XInput << 27;
+        int y = YInput << 23;
+
+        inputFlag = 0;
+        inputFlag = inputFlag | x;
+        inputFlag = inputFlag | y;
+        bool isDiff = prev_inputFlag != inputFlag;
+        if(isDiff)
+            Debug.Log("Difficult:  " + isDiff);
+
+        prev_inputFlag = inputFlag;
+        if (isDiff)
+        {
+            C_Move move = new C_Move();
+            move.Transform = null;
+            move.InputFlag = inputFlag;
+
+            NetworkManager.Instance.Send(move);
+        }
     }
 
     /// <summary>
@@ -78,12 +124,11 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 2022.12.20 / LJ
+    /// 2022.12.07 / LJ??
     /// 플레이어 이동 구현
     /// </summary>
     void Movement()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY).normalized;
 
         Vector3 targetDirection = Vector3.zero;
 
@@ -100,6 +145,9 @@ public class PlayerController : MonoBehaviour
             // StateManager
             playerStateManager.State = PlayerState.Move;
 
+            // Animation
+            anim.SetBool("Move", true);
+
             targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
             //rb.velocity = movement * speed * Time.deltaTime;
         }
@@ -107,7 +155,11 @@ public class PlayerController : MonoBehaviour
         {
             //StateManager
             if (playerStateManager.State != PlayerState.AFK)
+            {
                 playerStateManager.State = PlayerState.Idle;
+                // Animation
+                anim.SetBool("Move", false);
+            }
         }
 
         if (jump) // 중력
@@ -157,8 +209,15 @@ public class PlayerController : MonoBehaviour
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         jumpTimer = 0f;
         JumpTimerOut();
+        playerStateManager.State = PlayerState.Move;
+        // Animation
+        anim.SetTrigger("Jump");
     }
 
+    /// <summary>
+    ///  2022.12.21 / LJ
+    ///  점프 시간 관리
+    /// </summary>
     void JumpTimerOut()
     {
         jumpTimer += Time.deltaTime;
@@ -170,4 +229,16 @@ public class PlayerController : MonoBehaviour
         jump = true;
         return;
     }
+
+    void SyncPos()
+    {
+
+        int x = ((inputFlag >> 27) == 1) ? 1: ((inputFlag >> 27) == 2) ? -1 : 0;
+        int y = ((inputFlag >> 23 & 0b1111) == 1) ? 1: ((inputFlag >> 23 & 0b1111) == 2) ? -1 : 0;
+        rb.velocity = new Vector3(x,0,y).normalized * speed * Time.deltaTime;
+        Debug.Log("Y:  " + (inputFlag >> 23 & 0b1111));
+        Debug.Log($"{x} {y}");
+    }
 }
+
+

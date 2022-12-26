@@ -10,19 +10,19 @@ using UnityEngine.SceneManagement;
 public class PacketHandler
 {
     /// <summary>
-    /// 2022. 12. 20. / Eunseong
+    /// 2022. 12. 22. / Eunseong
     /// 방 생성 요청에 대해 응답이 왔을 때 실행되는 함수
     /// </summary>
     /// <param name="session"> 방 생성 요청을 응답한 세션</param>
     /// <param name="packet"> 받은 메세지</param>
-    public static void S_CreateroomResHandler(PacketSession session, IMessage packet)
+    public static void S_CreateRoomResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
-        S_CreateroomRes res = packet as S_CreateroomRes;
+        S_CreateRoomRes res = packet as S_CreateRoomRes;
         Room room =  ObjectManager.Instance.FindById(res.ObjectId).GetComponent<Room>();
-        room.Id = res.RoomId;
+        room.Info = res.Info;
 
-        NetworkManager.Instance.JoinedRoomId = res.RoomId;
+        NetworkManager.Instance.JoinedRoom = res.Info;
         // TODO 천막 씬으로 이동
         SceneManager.LoadScene("GameroomScene");
         Debug.Log("Room Create");
@@ -34,10 +34,10 @@ public class PacketHandler
     /// </summary>
     /// <param name="session"></param>
     /// <param name="packet"></param>
-    public static void S_JoinroomResHandler(PacketSession session, IMessage packet)
+    public static void S_JoinRoomResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
-        S_JoinroomRes res = packet as S_JoinroomRes;
+        S_JoinRoomRes res = packet as S_JoinRoomRes;
 
     }
     /// <summary>
@@ -50,9 +50,10 @@ public class PacketHandler
     {   
         ServerSession SS = session as ServerSession;
         S_EnterGame enter = packet as S_EnterGame;
-        
+
         ObjectManager.Instance.Add(enter.Player, true);
         Debug.Log("Mine Generate");
+
     }
     public static void S_LeaveGameHandler(PacketSession session, IMessage packet)
     {
@@ -93,9 +94,25 @@ public class PacketHandler
     public static void S_MoveHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
-        S_Move movePacket = packet as S_Move;
+        S_Move move = packet as S_Move;
 
-        
+        if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
+
+        PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
+
+        if (player == null)
+        {
+            Debug.Log("player not found");
+            return;
+        }
+        if(move.Transform == null)
+        {
+            player.inputFlag = move.InputFlag;
+        }
+        else
+        {
+            player.transform.position = new Vector3(move.Transform.Pos.X, move.Transform.Pos.Y, move.Transform.Pos.Z);
+        }
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
@@ -104,5 +121,10 @@ public class PacketHandler
     public static void S_UpdateGameStateResHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
-    }
+        S_UpdateGameStateRes res = packet as S_UpdateGameStateRes;
+
+        Debug.Log("RECV STATE PACKET");
+        RoomManager.Instance.State = res.State;
+
+    }   
 }
