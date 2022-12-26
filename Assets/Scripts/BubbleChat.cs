@@ -35,6 +35,12 @@ public class BubbleChat : MonoBehaviour
         this.message.text = message;
     }
 
+    
+
+    /// <summary>
+    /// 2022.12.26 / LJ
+    /// 채팅 삭제
+    /// </summary>
     public IEnumerator DestroyBubble()
     {
         Debug.Log("destroy");
