@@ -3,27 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Log : MonoBehaviour
+public class Log : NetworkingObject
 {
-    public bool IsStarted;
     public int RotY;
+    public float Speed;
 
     private void Update()
     {
-        if (!IsStarted) return;
-        transform.eulerAngles = new Vector3(0, RotY, 0);
+        
+    }
+
+    public override void UpdateTransform(TransformInfo transformInfo)
+    {
+        RotY = (int)transformInfo.Rot.Y;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (collision.gameObject.TryGetComponent(out PlayerController pc))
-            {
-                C_Move movePacket = new C_Move();
-                movePacket.State = ObjectState.Stun;
-                NetworkManager.Instance.Send(movePacket);
-            }
-        }
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+        //    if (collision.gameObject.TryGetComponent(out PlayerController pc))
+        //    {
+        //        C_Move movePacket = new C_Move();
+        //        movePacket.State = ObjectState.Stun;
+        //        NetworkManager.Instance.Send(movePacket);
+        //    }
+        //}
     }
 }

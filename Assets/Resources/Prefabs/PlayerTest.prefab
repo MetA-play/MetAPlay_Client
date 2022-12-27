@@ -652,6 +652,9 @@ GameObject:
   - component: {fileID: 401746954399265477}
   - component: {fileID: 401746954399265475}
   - component: {fileID: 401746954399265474}
+  - component: {fileID: 5809633162789599921}
+  - component: {fileID: 560225459309199633}
+  - component: {fileID: 6194732953029345584}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Player
@@ -690,7 +693,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c6e33640463334aacf1a7a63c9bed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStaticObject: 0
   speed: 13.9
+  jump: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpHeight: 0
+  jumpTimeout: 0
+  cam: {fileID: 401746954177061484}
+  targetRotation: 0
+  rotationVelocity: 0
+  gravity: -9.81
+  verticalVelocity: 0
+  anim: {fileID: 6194732953029345584}
+  inputFlag: 0
 --- !u!114 &401746954399265477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,7 +749,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
@@ -749,7 +766,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05d619b8572ad34384bc6c73936b8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerCam: {fileID: 0}
-  Player: {fileID: 0}
-  x_Rotation: 0
-  y_Rotation: 0
+  look: {x: 0, y: 0}
+  targetYaw: 0
+  playerCamTarget: {fileID: 401746954177061483}
+  playerCam: {fileID: 401746954177061484}
+  LockCameraPosition: 0
+  BottomClamp: -30
+  TopClamp: 70
+  CameraAngleOverride: 0
+  Player: {fileID: 401746954399265478}
+  x_RotationSpeed: 1
+  y_RotationSpeed: 1
+  cursorLocked: 1
+  cursorInputForLook: 1
+--- !u!143 &5809633162789599921
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401746954399265479}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &560225459309199633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401746954399265479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9edac6eb713fa84aa8380688ee3b0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetTimer: 300
+  isAFK: 0
+  anim: {fileID: 6194732953029345584}
+  timerLog: 0
+--- !u!95 &6194732953029345584
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401746954399265479}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

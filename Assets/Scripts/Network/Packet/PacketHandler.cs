@@ -96,22 +96,33 @@ public class PacketHandler
         ServerSession SS = session as ServerSession;
         S_Move move = packet as S_Move;
 
-        if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
+        GameObjectType type = ObjectManager.GetObjectTypeById(move.Id);
 
-        PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
+        if (type == GameObjectType.Player)
+        {
+            if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
 
-        if (player == null)
-        {
-            Debug.Log("player not found");
-            return;
+            PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
+
+            if (player == null)
+            {
+                Debug.Log("player not found");
+                return;
+            }
+            if(move.Transform == null)
+            {
+                player.inputFlag = move.InputFlag;
+            }
+            else
+            {
+                player.transform.position = new Vector3(move.Transform.Pos.X, move.Transform.Pos.Y, move.Transform.Pos.Z);
+            }
         }
-        if(move.Transform == null)
+        else if (type == GameObjectType.None)
         {
-            player.inputFlag = move.InputFlag;
-        }
-        else
-        {
-            player.transform.position = new Vector3(move.Transform.Pos.X, move.Transform.Pos.Y, move.Transform.Pos.Z);
+            GameObject obj = ObjectManager.Instance.FindById(move.Id);
+            obj.GetComponent<NetworkingObject>().UpdateTransform(move.Transform);
+            Debug.Log(move.Transform.Rot.Y);
         }
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)

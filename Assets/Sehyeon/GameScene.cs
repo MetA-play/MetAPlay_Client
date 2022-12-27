@@ -5,10 +5,21 @@ using Google.Protobuf.Protocol;
 
 public class GameScene : MonoBehaviour
 {
-    private void Start()
+    [ContextMenu("StartGame")]
+    public void StartGame()
     {
-        C_JoinRoomReq req = new C_JoinRoomReq() { RoomId = 1 };
+        C_UpdateGameStateReq gameStatePacket = new C_UpdateGameStateReq();
+        gameStatePacket.State = GameState.Playing;
 
+        NetworkManager.Instance.Send(gameStatePacket);
+    }
 
+    [ContextMenu("EndGame")]
+    public void EndGame()
+    {
+        C_UpdateGameStateReq gameStatePacket = new C_UpdateGameStateReq();
+        gameStatePacket.State = GameState.Ending;
+
+        NetworkManager.Instance.Send(gameStatePacket);
     }
 }
