@@ -15,6 +15,7 @@ public class NetworkManager : MonoBehaviour
     ServerSession _session = new ServerSession();
 
 
+    public UserInfo UserInfo { get; set; }
     public RoomInfo JoinedRoom { get; set; } = new RoomInfo();
 
     private void Start()

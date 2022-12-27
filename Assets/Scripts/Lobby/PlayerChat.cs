@@ -39,7 +39,7 @@ public class PlayerChat : MonoBehaviour
 
         // ListChat
         bool ismine = false;
-        if (username == GetComponent<PlayerInfo>().UserName)
+        if (username == NetworkManager.Instance.UserInfo.NickName)
             ismine = true;
         ListChatGroup.instance.addListChat.Invoke(message,username,ismine);
     }
