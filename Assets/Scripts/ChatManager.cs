@@ -20,7 +20,7 @@ public class ChatManager : MonoBehaviour
         var players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var i in players)
         {
-            if (i.GetComponent<PlayerInfo>().isMine)
+            if (i.GetComponent<NetworkingObject>().isMine)
                 Me = i.GetComponent<PlayerChat>();
         }
     }
@@ -73,7 +73,7 @@ public class ChatManager : MonoBehaviour
         else
         {
             // send message
-            Me.Chatting(field.text, Me.GetComponent<PlayerInfo>().UserName);
+            Me.Chatting(field.text,NetworkManager.Instance.UserInfo.NickName);
             CloseInputField();
         }
     }
