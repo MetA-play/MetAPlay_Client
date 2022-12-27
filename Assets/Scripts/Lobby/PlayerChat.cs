@@ -6,11 +6,9 @@ public class PlayerChat : MonoBehaviour
 {
     [Header("PlayerChatGroup")]
     public Transform bubbleChatGroup;
-    public Transform listChatGroup;
 
     [Header("ChatObject")]
     [SerializeField] private GameObject bubbleChat;
-    [SerializeField] private GameObject listChat;
 
     void Start()
     {
@@ -20,14 +18,14 @@ public class PlayerChat : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-            Chatting("TEST");
+            Chatting("TEST","User1");
     }
 
     /// <summary>
     /// 2022.12.26 / LJ
     /// 채팅을 화면에 표시
     /// </summary>
-    public void Chatting(string message)
+    public void Chatting(string message,string username)
     {
         // BubbleChat
         if (bubbleChatGroup.childCount >= 3) // FIFO
@@ -38,6 +36,11 @@ public class PlayerChat : MonoBehaviour
         GameObject bubbleObj = Instantiate(bubbleChat, bubbleChatGroup);
         bubbleObj.TryGetComponent<BubbleChat>(out BubbleChat bubble);
         bubble.SetMessage(message);
+
         // ListChat
+        bool ismine = false;
+        if (username == GetComponent<PlayerInfo>().UserName)
+            ismine = true;
+        ListChatGroup.instance.addListChat.Invoke(message,username,ismine);
     }
 }
