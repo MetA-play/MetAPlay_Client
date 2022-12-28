@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStaticObject: 0
   RotY: 0
-  Speed: 0.55
+  Speed: 0.6
 --- !u!1001 &4023801225735759982
 PrefabInstance:
   m_ObjectHideFlags: 0

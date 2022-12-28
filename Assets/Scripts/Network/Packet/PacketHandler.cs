@@ -138,4 +138,11 @@ public class PacketHandler
         RoomManager.Instance.State = res.State;
 
     }   
+
+    public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+
+        
+    }
 }

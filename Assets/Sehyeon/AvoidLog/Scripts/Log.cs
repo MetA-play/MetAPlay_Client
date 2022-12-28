@@ -10,7 +10,9 @@ public class Log : NetworkingObject
 
     private void Update()
     {
-        
+        Vector3 nextRot = new Vector3(0, RotY, 0);
+        Vector3 currentRot = transform.localEulerAngles;
+        transform.localEulerAngles = Vector3.MoveTowards(currentRot, nextRot, Speed);
     }
 
     public override void UpdateTransform(TransformInfo transformInfo)
@@ -20,14 +22,13 @@ public class Log : NetworkingObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Player"))
-        //{
-        //    if (collision.gameObject.TryGetComponent(out PlayerController pc))
-        //    {
-        //        C_Move movePacket = new C_Move();
-        //        movePacket.State = ObjectState.Stun;
-        //        NetworkManager.Instance.Send(movePacket);
-        //    }
-        //}
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.gameObject.TryGetComponent(out Rigidbody rb))
+            {
+                Debug.Log("Player Collision");
+                rb.AddForce(rb.velocity * 100);
+            }
+        }
     }
 }

@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStaticObject: 0
   RotY: 0
-  Speed: 0.3
+  Speed: 0.4
 --- !u!1 &7562953471937898510
 GameObject:
   m_ObjectHideFlags: 0

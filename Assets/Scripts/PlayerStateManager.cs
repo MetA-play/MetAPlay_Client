@@ -50,11 +50,6 @@ public class PlayerStateManager : MonoBehaviour
             Switching();
     }
 
-    void Update()
-    {
-        Debug.Log($":: Player State -> {State}");
-    }
-
     /// <summary>
     /// 2022.12.20 / LJ
     /// afk상태 검사 시작

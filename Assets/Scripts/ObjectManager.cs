@@ -38,27 +38,25 @@ public class ObjectManager : MonoBehaviour
         GameObjectType Type = GetObjectTypeById(info.Id);
         if (Type == GameObjectType.Player)
         {
-            //GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest");
-            //GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerDemo");
+            GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
 
-            //_objects.Add(info.Id, obj);
-            //obj.GetComponent<NetworkingObject>().Id = info.Id;
+            _objects.Add(info.Id, obj);
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
 
-            //if (myPlayer)
-            //{   
-            //    // MyPlayer 대입
-            //    MyPlayer = obj.GetComponent<PlayerController>();
-            //    MyPlayer.isMine = true;
-            //    //isMine 활성화
-            //}
-            //else
-            //{
-            //    obj.GetComponentInChildren<Camera>().gameObject.SetActive(false);
-            //    Destroy(obj.GetComponent<PlayerInput>());
-            //    Destroy(obj.GetComponent<PlayerCameraView>());
-            //}
-
-
+            if (myPlayer)
+            {
+                // MyPlayer 대입
+                MyPlayer = obj.GetComponent<PlayerController>();
+                MyPlayer.isMine = true;
+                //isMine 활성화
+            }
+            else
+            {
+                obj.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+                Destroy(obj.GetComponent<PlayerInput>());
+                Destroy(obj.GetComponent<PlayerCameraView>());
+            }
         }
         else if(Type == GameObjectType.Room)
         {
