@@ -46,6 +46,7 @@ public class NetworkingObject : MonoBehaviour
                 Rot = new Vector() { X = transform.eulerAngles.x, Y = transform.eulerAngles.y, Z = transform.eulerAngles.z }
             };
 
+            Debug.Log("Update Pos");
             NetworkManager.Instance.Send(move);
             yield return new WaitForSeconds(10);
         }

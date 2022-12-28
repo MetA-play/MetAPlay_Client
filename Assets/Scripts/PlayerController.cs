@@ -26,6 +26,7 @@ public class PlayerController : NetworkingObject
 
     private Rigidbody rb;
 
+
     private float movementX;
     private float movementY;
 
@@ -47,6 +48,8 @@ public class PlayerController : NetworkingObject
 
     int prev_inputFlag;
     public int inputFlag;
+    public float rotY;
+    
     private void Awake()
     {
         if (cam == null)
@@ -56,54 +59,70 @@ public class PlayerController : NetworkingObject
         playerStateManager = GetComponent<PlayerStateManager>();
     }
 
-    void Start()
+    public override void Start()
     {
-        
+        base.Start();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) onJump();
-        if (IsCheckGrounded()) jump = false;
-        else jump = true;
-
-
         if (isMine)
         {
             InputFunc();
+            if (Input.GetKeyDown(KeyCode.Space)) onJump();
+
         }
         if (!isMine)
         {
             SyncPos();
         }
+
+        if (IsCheckGrounded()) jump = false;
+        else jump = true;
     }
 
     private void FixedUpdate()
     {
         if(isMine)
-            Movement();
+            Movement(movementX,movementY, cam.transform.eulerAngles.y);
     }
 
+    /// <summary>
+    /// 2022. 12. 26. / 은성
+    /// 플레이어의 input 값을 받아 inputFlag에 비트단위로 넣어 input값이 달라졌을 시 서버에게 input값을 보냄
+    /// </summary>
     void InputFunc()
     {
-
-        int XInput = (movementX > 0) ? 1 : (movementX <0) ? 2 : 0;
-        int YInput = (movementY > 0) ? 1 : (movementY <0) ? 2 : 0;
+        // MOVE
+        int XInput = (movementX > 0) ? 1 : (movementX < 0) ? 2 : 0;
+        int YInput = (movementY > 0) ? 1 : (movementY < 0) ? 2 : 0;
         int x = XInput << 27;
         int y = YInput << 23;
+        int jump;
 
         inputFlag = 0;
         inputFlag = inputFlag | x;
         inputFlag = inputFlag | y;
-        bool isDiff = prev_inputFlag != inputFlag;
-        if(isDiff)
-            Debug.Log("Difficult:  " + isDiff);
+        bool isDiff = prev_inputFlag != inputFlag || rotY != cam.transform.eulerAngles.y;
+        
+        
+        // JUMP
+        if (Input.GetKeyDown(KeyCode.Space))
+        { 
+            jump = 1 << 22;
+            isDiff = true;
+        }
+        else
+            jump = 0;
+
+        inputFlag = inputFlag | jump;
 
         prev_inputFlag = inputFlag;
+        rotY = cam.transform.eulerAngles.y;
         if (isDiff)
         {
             C_Move move = new C_Move();
-            move.Transform = null;
+            move.Transform = new TransformInfo() { Rot = new Vector() { Y = cam.transform.eulerAngles.y } };
             move.InputFlag = inputFlag;
 
             NetworkManager.Instance.Send(move);
@@ -122,23 +141,24 @@ public class PlayerController : NetworkingObject
     }
 
     /// <summary>
-    /// 2022.12.07 / LJ??
+    /// 2022.12.26 / 은성
     /// 플레이어 이동 구현
+    /// 값을 받아와 이동하도록 구현
     /// </summary>
-    void Movement()
+    void Movement(float x, float z,float rotY)
     {
-        Vector3 movement = new Vector3(movementX,0,movementY);
+        Vector3 movement = new Vector3(x,0,z);
         Vector3 targetDirection = Vector3.zero;
 
         if (movement != Vector3.zero)
         {
-            targetRotation = Mathf.Atan2(movementX, movementY) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+            targetRotation = Mathf.Atan2(x, z) * Mathf.Rad2Deg + rotY;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationTime);
 
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
-        if ((!(movementX == 0 && movementY == 0)))
+        if ((!(x == 0 && z == 0)))
         {
             // StateManager
             playerStateManager.State = PlayerState.Move;
@@ -147,7 +167,6 @@ public class PlayerController : NetworkingObject
             anim.SetBool("Move", true);
 
             targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
-            //rb.velocity = movement * speed * Time.deltaTime;
         }
         else
         {
@@ -228,14 +247,19 @@ public class PlayerController : NetworkingObject
         return;
     }
 
+    /// <summary>
+    /// 2022. 12. 26. / 은성
+    /// 다른 클라의 캐릭터들의 포지션을 싱크를 맞추는 함수
+    /// </summary>
     void SyncPos()
     {
 
         int x = ((inputFlag >> 27) == 1) ? 1: ((inputFlag >> 27) == 2) ? -1 : 0;
         int y = ((inputFlag >> 23 & 0b1111) == 1) ? 1: ((inputFlag >> 23 & 0b1111) == 2) ? -1 : 0;
-        rb.velocity = new Vector3(x,0,y).normalized * speed * Time.deltaTime;
-        Debug.Log("Y:  " + (inputFlag >> 23 & 0b1111));
-        Debug.Log($"{x} {y}");
+        Movement(x, y, rotY);
+        int jump = (inputFlag >> 22 & 0b1);
+        if (jump > 0)
+            onJump();
     }
 }
 

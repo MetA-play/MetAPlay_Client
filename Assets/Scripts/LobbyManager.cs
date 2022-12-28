@@ -20,8 +20,11 @@ public class LobbyManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
 
-    
+    }
+
 
     /// <summary>
     /// 2022. 12. 19. / Eunseong

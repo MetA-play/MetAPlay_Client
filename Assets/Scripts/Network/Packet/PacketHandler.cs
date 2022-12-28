@@ -109,9 +109,11 @@ public class PacketHandler
                 Debug.Log("player not found");
                 return;
             }
-            if(move.Transform == null)
+            // 만약 inputFlag를 사용한다면
+            if(!move.IsSync)
             {
                 player.inputFlag = move.InputFlag;
+                player.rotY = move.Transform.Rot.Y;
             }
             else
             {
@@ -128,6 +130,9 @@ public class PacketHandler
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_Chat chat = packet as S_Chat;
+
+        ChatManager.instance.SendMsg(ObjectManager.Instance.FindById(chat.PlayerId).GetComponent<PlayerChat>(),ObjectManager.Instance.FindById(chat.PlayerId).GetComponent<PlayerInfo>().UserName, chat.Content);
     }
     public static void S_UpdateGameStateResHandler(PacketSession session, IMessage packet)
     {
