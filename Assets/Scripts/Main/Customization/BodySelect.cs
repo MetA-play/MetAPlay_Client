@@ -23,6 +23,9 @@ public class BodySelect : MonoBehaviour
     [Header("ColorPicker")]
     [SerializeField] private GameObject colorPicker;
 
+    [Header("PlayerColorPicker")]
+    [SerializeField] private GameObject playerColorPicker;
+
     public UnityEvent Change;
 
     void Start()
@@ -51,6 +54,7 @@ public class BodySelect : MonoBehaviour
             GameObject Obj = Instantiate(bodys[(int)current - 1], BodyPart);
             if (current == Body.망토)
             {
+                playerColorPicker.SetActive(false);
                 colorPicker.SetActive(true);
                 Obj.TryGetComponent<ColorPreview>(out ColorPreview color);
                 color.colorPicker = colorPicker.GetComponent<ColorPicker>();
