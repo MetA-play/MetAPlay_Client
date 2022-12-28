@@ -24,7 +24,7 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     private PointerDownLocation pointerDownLocation = PointerDownLocation.Outside;
 
     private RectTransform rectTransform;
-    private Image image;
+    [SerializeField] private Image image;
 
     float h, s, v;
 
