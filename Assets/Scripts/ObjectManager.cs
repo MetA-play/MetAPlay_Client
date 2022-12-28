@@ -43,6 +43,10 @@ public class ObjectManager : MonoBehaviour
             _objects.Add(info.Id, obj);
             obj.GetComponent<NetworkingObject>().Id = info.Id;
 
+            PlayerInfo pInfo = obj.GetComponent<PlayerInfo>();
+            pInfo.UserName = info.UserData.NickName;
+            pInfo._headPartsIdx = info.UserData.HeadPartsIdx;
+            pInfo._footPartsIdx = info.UserData.FootPartsIdx;
             if (myPlayer)
             {   
                 // MyPlayer 대입

@@ -12,7 +12,10 @@ public class PlayerChat : MonoBehaviour
 
     void Start()
     {
-        
+        if (gameObject.GetComponent<NetworkingObject>().isMine)
+        {
+            ChatManager.instance.SetMe(this);
+        }
     }
 
     void Update()
@@ -38,9 +41,6 @@ public class PlayerChat : MonoBehaviour
         bubble.SetMessage(message);
 
         // ListChat
-        bool ismine = false;
-        if (username == NetworkManager.Instance.UserInfo.NickName)
-            ismine = true;
-        ListChatGroup.instance.addListChat.Invoke(message,username,ismine);
+        ListChatGroup.instance.addListChat.Invoke(message,username,GetComponent<NetworkingObject>().isMine);
     }
 }

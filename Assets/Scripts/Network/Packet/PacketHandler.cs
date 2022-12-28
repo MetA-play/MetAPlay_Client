@@ -120,6 +120,9 @@ public class PacketHandler
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_Chat chat = packet as S_Chat;
+
+        ChatManager.instance.SendMsg(ObjectManager.Instance.FindById(chat.PlayerId).GetComponent<PlayerChat>(),ObjectManager.Instance.FindById(chat.PlayerId).GetComponent<PlayerInfo>().UserName, chat.Content);
     }
     public static void S_UpdateGameStateResHandler(PacketSession session, IMessage packet)
     {
