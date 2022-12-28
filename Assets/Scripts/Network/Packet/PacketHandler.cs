@@ -102,20 +102,13 @@ public class PacketHandler
 
         if (player == null)
         {
-            Debug.Log("player not found");
+            Debug.Log($"player not found in move   id: {move.Id}");
             return;
         }
         
         // 만약 inputFlag를 사용한다면
-        if(!move.IsSync)
-        {
-            player.inputFlag = move.InputFlag;
-            player.rotY = move.Transform.Rot.Y;
-        }
-        else
-        {
-            player.transform.position = new Vector3(move.Transform.Pos.X, move.Transform.Pos.Y, move.Transform.Pos.Z);
-        }
+        player.inputFlag = move.InputFlag;
+        player.rotY = move.Transform.Rot.Y;
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
@@ -132,5 +125,19 @@ public class PacketHandler
         Debug.Log("RECV STATE PACKET");
         RoomManager.Instance.State = res.State;
 
-    }   
+    }
+    public static void S_SyncPosHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+        S_SyncPos sync = packet as S_SyncPos;
+
+        GameObject obj = ObjectManager.Instance.FindById(sync.Id);
+
+        if(obj == null)
+        {
+            Debug.Log($"obj is null in syncPos {sync.Id}"); 
+            return;
+        }
+        obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z); 
+    }
 }

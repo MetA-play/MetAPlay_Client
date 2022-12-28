@@ -35,13 +35,15 @@ public class ObjectManager : MonoBehaviour
     public void Add(ObjectInfo info, bool myPlayer = false)
     {
         GameObjectType Type = GetObjectTypeById(info.Id);
+
+
         if (Type == GameObjectType.Player)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
 
             _objects.Add(info.Id, obj);
-            obj.GetComponent<NetworkingObject>().Id = info.Id;
 
             PlayerInfo pInfo = obj.GetComponent<PlayerInfo>();
             pInfo.UserName = info.UserData.NickName;
@@ -67,9 +69,18 @@ public class ObjectManager : MonoBehaviour
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/RoomObject");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
 
             _objects.Add(info.Id, obj);
 
+        }
+        else if(Type == GameObjectType.SoccerBall)
+        {
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/SoccerBall");
+            GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
+
+            _objects.Add(info.Id, obj);
         }
 
     }

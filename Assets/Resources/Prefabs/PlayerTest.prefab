@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1299211286273858981}
   m_Layer: 0
   m_Name: RightPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1299211286636556893}
   m_Layer: 0
   m_Name: CameraTarget
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1299211286861444201}
   m_Layer: 0
   m_Name: BodyPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1299211286966709310}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 1299211287025716666}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 1299211287082104241}
   m_Layer: 0
   m_Name: Left_Arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 1299211287280596531}
   m_Layer: 0
   m_Name: Right_Leg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 1299211287486997299}
   - component: {fileID: 1299211287486997300}
   - component: {fileID: 1299211287486997301}
+  - component: {fileID: 1392169826879009559}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Player
@@ -689,6 +690,20 @@ MonoBehaviour:
   UserName: User1
   _headPartsIdx: 0
   _footPartsIdx: 0
+--- !u!136 &1392169826879009559
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299211287486997302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.19
+  m_Height: 4.51
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &1299211287537377874
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +715,7 @@ GameObject:
   - component: {fileID: 1299211287537377873}
   m_Layer: 0
   m_Name: RightPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -735,7 +750,7 @@ GameObject:
   - component: {fileID: 1299211287653181134}
   m_Layer: 0
   m_Name: Right_Arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -830,7 +845,7 @@ GameObject:
   - component: {fileID: 1299211287714943682}
   m_Layer: 0
   m_Name: Legs
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -868,7 +883,7 @@ GameObject:
   - component: {fileID: 1299211287718691649}
   m_Layer: 0
   m_Name: Left_Leg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -965,7 +980,7 @@ GameObject:
   - component: {fileID: 1299211287723305208}
   m_Layer: 5
   m_Name: NickName
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1098,7 +1113,7 @@ GameObject:
   - component: {fileID: 1299211287796153243}
   m_Layer: 0
   m_Name: LeftPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1130,7 +1145,7 @@ GameObject:
   - component: {fileID: 1299211288023596762}
   m_Layer: 0
   m_Name: Arms
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1165,7 +1180,7 @@ GameObject:
   - component: {fileID: 1299211288074030982}
   m_Layer: 0
   m_Name: LeftPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1200,7 +1215,7 @@ GameObject:
   - component: {fileID: 1299211288124019752}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1295,7 +1310,7 @@ GameObject:
   - component: {fileID: 1299211288302405170}
   m_Layer: 5
   m_Name: BubbleChatGroup
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1423,7 +1438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 46bf9dda49db73843a70ef2e9dac589c, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3553675353582895564, guid: 46bf9dda49db73843a70ef2e9dac589c, type: 3}
       propertyPath: m_TagString
@@ -1493,7 +1508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 77b2e83926b2b5f46a9db3aab690db6a, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77b2e83926b2b5f46a9db3aab690db6a, type: 3}
@@ -1571,7 +1586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3b16fdcc9072f494d87e9c6b880a374c, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b16fdcc9072f494d87e9c6b880a374c, type: 3}
@@ -1649,7 +1664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3ad90134a6440a24bb8d814245dc8e5d, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ad90134a6440a24bb8d814245dc8e5d, type: 3}
@@ -1723,7 +1738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3b16fdcc9072f494d87e9c6b880a374c, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b16fdcc9072f494d87e9c6b880a374c, type: 3}
