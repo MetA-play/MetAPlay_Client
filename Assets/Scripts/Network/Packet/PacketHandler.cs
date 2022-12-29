@@ -140,4 +140,16 @@ public class PacketHandler
         }
         obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z); 
     }
+    public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+    }
+    public static void S_PlayerDeadHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+    }
+    public static void S_GameEndHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+    }
 }

@@ -20,7 +20,9 @@ public class LobbyManager : MonoBehaviour
 
     private void Start()
     {
-
+        C_SetUserinfo set = new C_SetUserinfo();
+        set.Info = NetworkManager.Instance.UserInfo;
+        NetworkManager.Instance.Send(set);
     }
 
 

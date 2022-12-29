@@ -48,12 +48,16 @@ public class ObjectManager : MonoBehaviour
             PlayerInfo pInfo = obj.GetComponent<PlayerInfo>();
             pInfo.UserName = info.UserData.NickName;
             pInfo._headPartsIdx = info.UserData.HeadPartsIdx;
+            pInfo._bodyPartsIdx = info.UserData.BodyPartsIdx;
             pInfo._footPartsIdx = info.UserData.FootPartsIdx;
+            pInfo.BodyColor = new Color(info.UserData.BodyColor.R, info.UserData.BodyColor.G, info.UserData.BodyColor.B);
+            pInfo.CloackColor = new Color(info.UserData.CloakColor.R, info.UserData.CloakColor.G, info.UserData.CloakColor.B);
             if (myPlayer)
             {   
                 // MyPlayer 대입
                 MyPlayer = obj.GetComponent<PlayerController>();
                 MyPlayer.isMine = true;
+              
                 //isMine 활성화
             }
             else
@@ -61,6 +65,7 @@ public class ObjectManager : MonoBehaviour
                 obj.GetComponentInChildren<Camera>().gameObject.SetActive(false);
                 Destroy(obj.GetComponent<PlayerInput>());
                 Destroy(obj.GetComponent<PlayerCameraView>());
+               
             }
 
 
