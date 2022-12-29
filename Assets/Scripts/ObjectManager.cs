@@ -82,6 +82,14 @@ public class ObjectManager : MonoBehaviour
 
             _objects.Add(info.Id, obj);
         }
+        else if (Type == GameObjectType.None)
+        {
+            GameObject prefab = Resources.Load<GameObject>($"Prefabs/{info.PrefabName}");
+            GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
+
+            _objects.Add(info.Id, obj);
+        }
 
     }
 

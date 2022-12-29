@@ -96,19 +96,29 @@ public class PacketHandler
         ServerSession SS = session as ServerSession;
         S_Move move = packet as S_Move;
 
-        if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
+        GameObjectType type = ObjectManager.GetObjectTypeById(move.Id);
 
-        PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
-
-        if (player == null)
+        if (type == GameObjectType.Player)
         {
-            Debug.Log($"player not found in move   id: {move.Id}");
-            return;
-        }
+            if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
+
+            PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
+
+            if (player == null)
+            {
+                Debug.Log($"player not found in move   id: {move.Id}");
+                return;
+            }
         
-        // 만약 inputFlag를 사용한다면
-        player.inputFlag = move.InputFlag;
-        player.rotY = move.Transform.Rot.Y;
+            // 만약 inputFlag를 사용한다면
+            player.inputFlag = move.InputFlag;
+            player.rotY = move.Transform.Rot.Y;
+        }
+        else if (type == GameObjectType.None)
+        {
+            NetworkingObject obj = ObjectManager.Instance.FindById(move.Id).GetComponent<NetworkingObject>();
+            obj.UpdateTransform(move.Transform);
+        }
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
@@ -138,7 +148,9 @@ public class PacketHandler
             Debug.Log($"obj is null in syncPos {sync.Id}"); 
             return;
         }
-        obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z); 
+        obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z);
+        if (obj.TryGetComponent(out PlayerController pc))
+            pc.targetDirection = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z);
     }
 
     public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)

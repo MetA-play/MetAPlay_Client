@@ -11,7 +11,6 @@ public class FloorBlock : MonoBehaviour
 
     private bool IsDeleted;
 
-    [ContextMenu(nameof(OnDelete))]
     public void OnDelete()
     {
         StartCoroutine(DeleteAnimation());
@@ -21,9 +20,9 @@ public class FloorBlock : MonoBehaviour
     {
         IsDeleted = true;
         Vector3 currPos = transform.position;
-        Vector3 destPos = new Vector3(currPos.x, currPos.y - 0.7f, currPos.z);
+        Vector3 destPos = new Vector3(currPos.x, currPos.y - 1f, currPos.z);
 
-        while (transform.position.y > destPos.y + 0.01f)
+        while (transform.position.y > destPos.y + 0.1f)
         {
             transform.position = Vector3.Lerp(currPos, destPos, Speed);
             currPos = transform.position;
