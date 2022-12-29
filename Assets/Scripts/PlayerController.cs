@@ -49,6 +49,8 @@ public class PlayerController : NetworkingObject
     int prev_inputFlag;
     public int inputFlag;
     public float rotY;
+
+    public bool isSit = false;
     
     private void Awake()
     {
@@ -69,7 +71,14 @@ public class PlayerController : NetworkingObject
         if (isMine)
         {
             InputFunc();
-            if (Input.GetKeyDown(KeyCode.Space)) onJump();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (isSit) // 의자에 앉아 있다면
+                {
+                    Stand();
+                }
+                onJump();
+            }
 
         }
         if (!isMine)
@@ -85,6 +94,28 @@ public class PlayerController : NetworkingObject
     {
         if(isMine)
             Movement(movementX,movementY, cam.transform.eulerAngles.y);
+    }
+
+    /// <summary>
+    /// 2022.12.29 / LJ
+    /// 플레이어가 의자에 앉음
+    /// </summary>
+    /// <param name="target">의자 포지션</param>
+    public void Sit(Transform target)
+    {
+        isSit = true;
+        transform.position = target.position;
+        // anim
+    }
+
+    /// <summary>
+    /// 2022.12.29 / LJ
+    /// 의자에서 일어남
+    /// </summary>
+    void Stand()
+    {
+        isSit = false;
+        // anim
     }
 
     /// <summary>
