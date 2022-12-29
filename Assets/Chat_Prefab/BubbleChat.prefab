@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBC18\uAC11\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f8106e53c99450a479fd68208c96afe9, type: 2}
-  m_sharedMaterial: {fileID: -8236154157959414430, guid: f8106e53c99450a479fd68208c96afe9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 123ab8a39cad2b846a80f5cb427c0299, type: 2}
+  m_sharedMaterial: {fileID: -4603671609281066180, guid: 123ab8a39cad2b846a80f5cb427c0299, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
