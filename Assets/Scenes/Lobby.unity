@@ -6535,7 +6535,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782810584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.5, y: 0, z: 90.47}
+  m_LocalPosition: {x: 21.45, y: 4.43, z: 98.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6714,7 +6714,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UserName: User1
   _headPartsIdx: 0
+  _bodyPartsIdx: 0
   _footPartsIdx: 0
+  BodyColor: {r: 0, g: 0, b: 0, a: 0}
+  CloackColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &782810596
 MonoBehaviour:
   m_ObjectHideFlags: 0
