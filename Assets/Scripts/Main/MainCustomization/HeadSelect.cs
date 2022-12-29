@@ -48,6 +48,7 @@ public class HeadSelect : MonoBehaviour
         }
         partName.text = current.ToString();
 
-        MainSceneManager.Instance._headPartIdx = (int)current - 1;
+        MainSceneManager.Instance._headPartIdx = ((int)current > 0) ? (int)current - 1 : (int)current; ;
+        Debug.Log(MainSceneManager.Instance._headPartIdx);
     }
-}
+    }

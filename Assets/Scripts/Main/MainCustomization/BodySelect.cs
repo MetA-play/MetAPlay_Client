@@ -63,6 +63,6 @@ public class BodySelect : MonoBehaviour
         }
         partName.text = current.ToString();
 
-        MainSceneManager.Instance._bodyPartIdx = (int)current - 1;
+        MainSceneManager.Instance._bodyPartIdx =  ((int)current > 0) ? (int)current - 1 : (int)current ;
     }
 }

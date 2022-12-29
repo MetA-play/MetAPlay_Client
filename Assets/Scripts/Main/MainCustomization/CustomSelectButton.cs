@@ -61,6 +61,8 @@ public class CustomSelectButton : MonoBehaviour
 /// 2022.12.28 / LJ
 /// 인스펙터 창에서 각 파츠를 선택했을때 그 파츠에 필요한 프로퍼티만 보여줌
 /// </summary>
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(CustomSelectButton))]
 class CustomInspectorEditor : Editor
 {
@@ -72,7 +74,7 @@ class CustomInspectorEditor : Editor
     SerializedProperty b_sel_prop;
     SerializedProperty l_sel_prop;
 
-    private void Awake()
+private void Awake()
     {
         part_prop = serializedObject.FindProperty("part");
         head_prop = serializedObject.FindProperty("head");
@@ -106,3 +108,4 @@ class CustomInspectorEditor : Editor
     }
 }
 
+#endif
