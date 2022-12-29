@@ -8,12 +8,10 @@ public class ListChat : MonoBehaviour
     [Header("TMP")]
     [SerializeField] private TextMeshProUGUI userName_TMP;
     [SerializeField] private TextMeshProUGUI message_TMP;
-    
-
 
     void Start()
     {
-        
+        Destroy(this.gameObject, 5f);
     }
 
     void Update()
@@ -23,7 +21,6 @@ public class ListChat : MonoBehaviour
 
     public void SetMessage(string message,string username,bool ismine)
     {
-        Debug.Log($"msg : {message}\tusername : {username}\t ismine : {ismine}");
         message_TMP.text = message;
         userName_TMP.text = $"[ {username} ]";
         if (ismine)
