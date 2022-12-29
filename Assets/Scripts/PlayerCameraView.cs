@@ -71,7 +71,7 @@ public class PlayerCameraView : MonoBehaviour
     /// </summary>
     void Init()
     {
-        playerCam = Camera.main;
+        if (GetComponent<NetworkingObject>().isMine) playerCam.tag = "MainCamera";
         Player = transform;
         targetYaw = playerCamTarget.transform.rotation.eulerAngles.y;
     }
