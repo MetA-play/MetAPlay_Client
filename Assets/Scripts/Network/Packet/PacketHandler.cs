@@ -149,8 +149,6 @@ public class PacketHandler
             return;
         }
         obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z);
-        if (obj.TryGetComponent(out PlayerController pc))
-            pc.targetDirection = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z);
     }
 
     public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
