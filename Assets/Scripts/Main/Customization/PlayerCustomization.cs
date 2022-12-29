@@ -45,8 +45,6 @@ public class PlayerCustomization : MonoBehaviour
                     }
                     else
                     {
-                        if (bodyColorPicker.activeSelf) return;
-                        bodyColorPicker.SetActive(false);
                         playerColorPicker.GetComponent<ColorPicker>().color = GetComponent<ColorPreview>().previewGraphic.color;
                         playerColorPicker.SetActive(true);
                     }
