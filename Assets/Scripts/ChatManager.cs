@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using Google.Protobuf.Protocol;
 
 public class ChatManager : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class ChatManager : MonoBehaviour
 
     [SerializeField] PlayerChat Me;
 
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
     void Start()
     {
         var players = GameObject.FindGameObjectsWithTag("Player");
@@ -23,6 +32,7 @@ public class ChatManager : MonoBehaviour
             if (i.GetComponent<NetworkingObject>().isMine)
                 Me = i.GetComponent<PlayerChat>();
         }
+
     }
 
     void Update()
@@ -32,7 +42,7 @@ public class ChatManager : MonoBehaviour
             if (isactive == false)
                 OpenInputField();
             else
-                SendMessage();
+                TrySendMessage();
         }
     }
 
@@ -61,20 +71,39 @@ public class ChatManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 2022.12.27 / LJ
+    /// 2022.12.28 / LJ
     /// 채팅 보내기
     /// </summary>
-    void SendMessage()
+    public void TrySendMessage()
     {
         chatInput.TryGetComponent<TMP_InputField>(out TMP_InputField field);
 
         if (field.text == "")
             CloseInputField();
-        else
+
+
+        C_Chat chat = new C_Chat();
+        chat.Content = field.text;
+
+        NetworkManager.Instance.Send(chat);
+        /*else
         {
             // send message
-            Me.Chatting(field.text,NetworkManager.Instance.UserInfo.NickName);
-            CloseInputField();
-        }
+            
+        }*/
+    }
+
+    public void SendMsg(PlayerChat chat,string nickName,string context)
+    {
+        chat.Chatting(context, nickName);
+        CloseInputField();
+    }
+    /// <summary>
+    /// 2022. 12. 28/ 은성
+    /// Me 변수 Set
+    /// </summary>
+    public void SetMe(PlayerChat chat)
+    {
+        Me = chat;
     }
 }

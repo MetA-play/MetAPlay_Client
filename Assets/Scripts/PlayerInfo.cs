@@ -6,5 +6,6 @@ public class PlayerInfo : MonoBehaviour
 {
     [Header("UserInfo")]
     public string UserName;
-    public bool isMine;
+    public int _headPartsIdx;
+    public int _footPartsIdx;
 }

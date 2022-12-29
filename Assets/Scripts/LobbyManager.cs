@@ -16,12 +16,13 @@ public class LobbyManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+    }
 
+    private void Start()
+    {
 
     }
 
-
-    
 
     /// <summary>
     /// 2022. 12. 19. / Eunseong
