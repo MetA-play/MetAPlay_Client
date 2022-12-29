@@ -47,5 +47,9 @@ public class LegSelect : MonoBehaviour
             Instantiate(legs[(int)current - 1], LegPart);
         }
         partName.text = current.ToString();
+    
+        MainSceneManager.Instance._footPartIdx = (int)current- 1;
     }
+
+    
 }

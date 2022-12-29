@@ -62,5 +62,7 @@ public class BodySelect : MonoBehaviour
             }
         }
         partName.text = current.ToString();
+
+        MainSceneManager.Instance._bodyPartIdx = (int)current - 1;
     }
 }
