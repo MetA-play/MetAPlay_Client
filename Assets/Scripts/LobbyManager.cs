@@ -16,8 +16,6 @@ public class LobbyManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
-
-
     }
 
     private void Start()

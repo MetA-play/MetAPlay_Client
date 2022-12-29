@@ -33,8 +33,7 @@ public class NetworkingObject : MonoBehaviour
             if (isStaticObject) break;
             yield return null;
 
-            C_Move move = new C_Move();
-            move.InputFlag = 0;
+            C_SyncPos move = new C_SyncPos();
             move.Transform = new TransformInfo()
             {
                 Pos = new Vector()

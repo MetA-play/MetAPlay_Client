@@ -96,36 +96,19 @@ public class PacketHandler
         ServerSession SS = session as ServerSession;
         S_Move move = packet as S_Move;
 
-        GameObjectType type = ObjectManager.GetObjectTypeById(move.Id);
+        if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
 
-        if (type == GameObjectType.Player)
+        PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
+
+        if (player == null)
         {
-            if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
-
-            PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
-
-            if (player == null)
-            {
-                Debug.Log("player not found");
-                return;
-            }
-            // 만약 inputFlag를 사용한다면
-            if(!move.IsSync)
-            {
-                player.inputFlag = move.InputFlag;
-                player.rotY = move.Transform.Rot.Y;
-            }
-            else
-            {
-                player.transform.position = new Vector3(move.Transform.Pos.X, move.Transform.Pos.Y, move.Transform.Pos.Z);
-            }
+            Debug.Log($"player not found in move   id: {move.Id}");
+            return;
         }
-        else if (type == GameObjectType.None)
-        {
-            GameObject obj = ObjectManager.Instance.FindById(move.Id);
-            obj.GetComponent<NetworkingObject>().UpdateTransform(move.Transform);
-            Debug.Log(move.Transform.Rot.Y);
-        }
+        
+        // 만약 inputFlag를 사용한다면
+        player.inputFlag = move.InputFlag;
+        player.rotY = move.Transform.Rot.Y;
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
@@ -143,27 +126,18 @@ public class PacketHandler
         RoomManager.Instance.State = res.State;
 
     }
-
-    public static void C_SyncPosHandler(PacketSession session, IMessage packet)
-    {
-        ClientSession clientSession = session as ClientSession;
-        C_SyncPos sync = packet as C_SyncPos;
-
-        if (clientSession.MyPlayer.Session != null)
-        {
-            clientSession.MyPlayer.Room.Push(clientSession.MyPlayer.Room.MoveHandle, clientSession.MyPlayer, sync);
-        }
-        else
-        {
-            Lobby.Instance.Push(Lobby.Instance.MoveHandle, clientSession.MyPlayer, sync);
-
-        }
-    }
-
-    public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
+    public static void S_SyncPosHandler(PacketSession session, IMessage packet)
     {
         ServerSession SS = session as ServerSession;
+        S_SyncPos sync = packet as S_SyncPos;
 
-        
+        GameObject obj = ObjectManager.Instance.FindById(sync.Id);
+
+        if(obj == null)
+        {
+            Debug.Log($"obj is null in syncPos {sync.Id}"); 
+            return;
+        }
+        obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z); 
     }
 }
