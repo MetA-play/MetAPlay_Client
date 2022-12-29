@@ -13,7 +13,7 @@ public class BubbleChat : MonoBehaviour
 
     void Start()
     {
-        
+        Destroy(this.gameObject, 3f);
     }
 
    void Update()
@@ -43,7 +43,6 @@ public class BubbleChat : MonoBehaviour
     /// </summary>
     public IEnumerator DestroyBubble()
     {
-        Debug.Log("destroy");
         // anim
         //anim.SetTrigger("Destroy");
         yield return null;
