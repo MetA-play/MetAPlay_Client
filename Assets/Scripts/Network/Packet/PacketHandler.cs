@@ -140,4 +140,23 @@ public class PacketHandler
         }
         obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z); 
     }
+
+    public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
+    {
+        if (FloorBlockController.Instance == null) return;
+        S_DeleteFloorBlock DFB = packet as S_DeleteFloorBlock;
+        FloorBlockController.Instance.DeleteFloorBlock(DFB.FloorIndex, DFB.BlockIndex);
+    }
+
+    public static void S_PlayerDeadHandler(PacketSession session, IMessage packet)
+    {
+        S_PlayerDead deadPacket = packet as S_PlayerDead;
+        Debug.Log(deadPacket.PlayerId);
+    }
+
+    public static void S_GameEndHandler(PacketSession session, IMessage packet)
+    {
+        S_GameEnd endGamePacket = packet as S_GameEnd;
+        Debug.Log(endGamePacket.WinnerId);
+    }
 }
