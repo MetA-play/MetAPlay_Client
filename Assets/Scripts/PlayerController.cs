@@ -49,6 +49,7 @@ public class PlayerController : NetworkingObject
     int prev_inputFlag;
     public int inputFlag;
     public float rotY;
+    public bool isSyncronizing;
 
     public bool isSit = false;
     
@@ -176,8 +177,13 @@ public class PlayerController : NetworkingObject
     /// 플레이어 이동 구현
     /// 값을 받아와 이동하도록 구현
     /// </summary>
-    void Movement(float x, float z,float rotY)
+    public void Movement(float x, float z,float rotY)
     {
+        if(isSyncronizing)
+        {
+            isSyncronizing= false;
+            return;
+        }
         Vector3 movement = new Vector3(x,0,z);
         Vector3 targetDirection = Vector3.zero;
 
