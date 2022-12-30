@@ -8,6 +8,20 @@ namespace Define
     }
 }
 
+namespace Game
+{
+    public enum GameKinds
+    {
+        Log,
+        Spleef,
+        Runner,
+
+
+
+        Preparing
+    }
+}
+
 namespace Customization
 {
     public enum Part
