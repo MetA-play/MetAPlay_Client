@@ -169,4 +169,16 @@ public class PacketHandler
         S_GameEnd endGamePacket = packet as S_GameEnd;
         Debug.Log(endGamePacket.WinnerId);
     }
+    public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+    }
+    public static void S_PlayerDeadHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+    }
+    public static void S_GameEndHandler(PacketSession session, IMessage packet)
+    {
+        ServerSession SS = session as ServerSession;
+    }
 }

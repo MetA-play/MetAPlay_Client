@@ -5,18 +5,18 @@ using Customization;
 using UnityEngine.Events;
 using TMPro;
 
-public class HeadSelect : MonoBehaviour
+public class LegSelect : MonoBehaviour
 {
     [Header("Current")]
-    [SerializeField] private Head current;
+    [SerializeField] private Leg current;
 
     [SerializeField] private CustomSelectButton button;
 
     [Header("Objects")]
-    [SerializeField] private List<GameObject> heads;
+    [SerializeField] private List<GameObject> legs;
 
     [Header("PartParent")]
-    [SerializeField] private Transform HeadPart;
+    [SerializeField] private Transform LegPart;
 
     [SerializeField] private TextMeshProUGUI partName;
 
@@ -24,12 +24,12 @@ public class HeadSelect : MonoBehaviour
 
     void Start()
     {
-        ChangeObject();
+        Change.AddListener(ChangeObject);
     }
 
     void Update()
     {
-        current = button.head;
+        current = button.leg;
     }
 
     /// <summary>
@@ -38,14 +38,18 @@ public class HeadSelect : MonoBehaviour
     /// </summary>
     public void ChangeObject()
     {
-        for (int i = 0; i < HeadPart.childCount; i++)
+        for (int i = 0; i < LegPart.childCount; i++)
         {
-            Destroy(HeadPart.GetChild(i).gameObject);
+            Destroy(LegPart.GetChild(i).gameObject);
         }
-        if (current != Head.선택안함)
+        if (current != Leg.선택안함)
         {
-            Instantiate(heads[(int)current - 1], HeadPart);
+            Instantiate(legs[(int)current - 1], LegPart);
         }
         partName.text = current.ToString();
+    
+        MainSceneManager.Instance._footPartIdx = ((int)current > 0) ? (int)current - 1 : (int)current; ;
     }
+
+    
 }
