@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5491296, g: 0.79472405, b: 0.9728572, a: 1}
+  m_IndirectSpecularColor: {r: 0.5493344, g: 0.7941628, b: 0.9733974, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7330,6 +7330,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   inputFlag: 0
   rotY: 0
+  isSyncronizing: 0
   isSit: 0
 --- !u!114 &782810589
 MonoBehaviour:
@@ -7356,6 +7357,7 @@ MonoBehaviour:
   y_RotationSpeed: 1
   cursorLocked: 1
   cursorInputForLook: 1
+  Sensitive: 7
 --- !u!114 &782810591
 MonoBehaviour:
   m_ObjectHideFlags: 0
