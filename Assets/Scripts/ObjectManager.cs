@@ -16,7 +16,7 @@ public class ObjectManager : MonoBehaviour
     public static GameObjectType GetObjectTypeById(int id)
     {
         int type = (id >> 24) & 0x7F;
-        return (GameObjectType)type;    
+        return (GameObjectType)type;
     }
 
 
@@ -28,7 +28,7 @@ public class ObjectManager : MonoBehaviour
             _instance = this;
         else
             Destroy(gameObject);
-    
+
     }
 
 
@@ -53,11 +53,11 @@ public class ObjectManager : MonoBehaviour
             pInfo.BodyColor = new Color(info.UserData.BodyColor.R, info.UserData.BodyColor.G, info.UserData.BodyColor.B);
             pInfo.CloackColor = new Color(info.UserData.CloakColor.R, info.UserData.CloakColor.G, info.UserData.CloakColor.B);
             if (myPlayer)
-            {   
+            {
                 // MyPlayer 대입
                 MyPlayer = obj.GetComponent<PlayerController>();
                 MyPlayer.isMine = true;
-              
+
                 //isMine 활성화
             }
             else
@@ -65,12 +65,12 @@ public class ObjectManager : MonoBehaviour
                 obj.GetComponentInChildren<Camera>().gameObject.SetActive(false);
                 Destroy(obj.GetComponent<PlayerInput>());
                 Destroy(obj.GetComponent<PlayerCameraView>());
-               
+
             }
 
 
         }
-        else if(Type == GameObjectType.Room)
+        else if (Type == GameObjectType.Room)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/RoomObject");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
@@ -79,7 +79,7 @@ public class ObjectManager : MonoBehaviour
             _objects.Add(info.Id, obj);
 
         }
-        else if(Type == GameObjectType.SoccerBall)
+        else if (Type == GameObjectType.SoccerBall)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/SoccerBall");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
@@ -110,5 +110,6 @@ public class ObjectManager : MonoBehaviour
             Destroy(_objects[Id]);
         }
     }
-
 }
+
+  

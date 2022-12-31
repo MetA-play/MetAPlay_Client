@@ -7330,6 +7330,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   inputFlag: 0
   rotY: 0
+  isSyncronizing: 0
   isSit: 0
 --- !u!114 &782810589
 MonoBehaviour:
@@ -7356,6 +7357,7 @@ MonoBehaviour:
   y_RotationSpeed: 1
   cursorLocked: 1
   cursorInputForLook: 1
+  Sensitive: 7
 --- !u!114 &782810591
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -138,7 +138,15 @@ public class PacketHandler
             Debug.Log($"obj is null in syncPos {sync.Id}"); 
             return;
         }
-        obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z); 
+
+        obj.transform.position = new Vector3(sync.Transform.Pos.X, sync.Transform.Pos.Y, sync.Transform.Pos.Z);
+
+        GameObjectType Type = ObjectManager.GetObjectTypeById(sync.Id);
+        if(Type == GameObjectType.Player)
+        {
+            obj.GetComponent<PlayerController>().isSyncronizing = true;
+        }
+
     }
     public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
     {
