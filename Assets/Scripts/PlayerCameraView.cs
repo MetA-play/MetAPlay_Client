@@ -50,6 +50,7 @@ public class PlayerCameraView : MonoBehaviour
     [Header("Mouse Cursor Settings")]
     public bool cursorLocked = true;
     public bool cursorInputForLook = true;
+    [Range(0f, 10f)] public float Sensitive = 1f;
 
     void Start()
     {
@@ -95,8 +96,8 @@ public class PlayerCameraView : MonoBehaviour
         {
             float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-            targetYaw += look.x * deltaTimeMultiplier;
-            targetPitch += look.y * deltaTimeMultiplier;
+            targetYaw += look.x * deltaTimeMultiplier * Sensitive;
+            targetPitch += look.y * deltaTimeMultiplier * Sensitive;
         }
         targetYaw = ClampAngle(targetYaw, float.MinValue, float.MaxValue);
         targetPitch = ClampAngle(targetPitch, BottomClamp, TopClamp);
