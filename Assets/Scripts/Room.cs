@@ -7,14 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class Room : NetworkingObject
 {
-    public RoomInfo Info;
+    public RoomInfo Info = new RoomInfo();
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Room Collision");
         if (other.gameObject.CompareTag("Player"))
         {
-            NetworkManager.Instance.JoinedRoom.Id = Info.Id;
-            SceneManager.LoadScene("GameroomScene");
+            if (other.GetComponent<NetworkingObject>().isMine)
+            {
+                NetworkManager.Instance.JoinedRoom.Id = Info.Id;
+                SceneManager.LoadScene("GameroomScene");
+            }
         }
     }
 

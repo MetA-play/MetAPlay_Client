@@ -51,12 +51,14 @@ public class ObjectManager : MonoBehaviour
             pInfo._bodyPartsIdx = info.UserData.BodyPartsIdx;
             pInfo._footPartsIdx = info.UserData.FootPartsIdx;
             pInfo.BodyColor = new Color(info.UserData.BodyColor.R, info.UserData.BodyColor.G, info.UserData.BodyColor.B);
-            pInfo.CloackColor = new Color(info.UserData.CloakColor.R, info.UserData.CloakColor.G, info.UserData.CloakColor.B);
+            if(info.UserData.CloakColor != null)
+                pInfo.CloackColor = new Color(info.UserData.CloakColor.R, info.UserData.CloakColor.G, info.UserData.CloakColor.B);
             if (myPlayer)
             {
                 // MyPlayer 대입
                 MyPlayer = obj.GetComponent<PlayerController>();
                 MyPlayer.isMine = true;
+                PlayerCreateRoom.Instance.playerCam = ObjectManager.Instance.MyPlayer.GetComponent<PlayerCameraView>();
 
                 //isMine 활성화
             }
@@ -75,7 +77,7 @@ public class ObjectManager : MonoBehaviour
             GameObject prefab = Resources.Load<GameObject>("Prefabs/RoomObject");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
             obj.GetComponent<NetworkingObject>().Id = info.Id;
-
+            obj.GetComponent<Room>().Info.Id = (int)info.Transform.Scale.Y;
             _objects.Add(info.Id, obj);
 
         }
@@ -107,7 +109,7 @@ public class ObjectManager : MonoBehaviour
 
         if (_objects.Remove(Id, out obj) == true)
         {
-            Destroy(_objects[Id]);
+            Destroy(obj);
         }
     }
 }
