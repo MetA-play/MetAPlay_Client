@@ -1,6 +1,7 @@
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +23,7 @@ public class ObjectManager : MonoBehaviour
 
     //public PlayerWithNetwork MyPlayer { get; set; }
 
-    void Start()
+    void Awake()
     {
         if (_instance == null)
             _instance = this;
@@ -39,7 +40,7 @@ public class ObjectManager : MonoBehaviour
 
         if (Type == GameObjectType.Player)
         {
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest");
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest 1");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
             obj.GetComponent<NetworkingObject>().Id = info.Id;
 
@@ -70,7 +71,7 @@ public class ObjectManager : MonoBehaviour
 
             }
 
-
+            
         }
         else if (Type == GameObjectType.Room)
         {
@@ -84,6 +85,14 @@ public class ObjectManager : MonoBehaviour
         else if (Type == GameObjectType.SoccerBall)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/SoccerBall");
+            GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
+            obj.GetComponent<NetworkingObject>().Id = info.Id;
+
+            _objects.Add(info.Id, obj);
+        }
+        else if (Type == GameObjectType.None)
+        {
+            GameObject prefab = Resources.Load<GameObject>($"Prefabs/{info.PrefabName}");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
             obj.GetComponent<NetworkingObject>().Id = info.Id;
 
@@ -111,6 +120,11 @@ public class ObjectManager : MonoBehaviour
         {
             Destroy(obj);
         }
+    }
+
+    public int PlayerCount()
+    {
+        return _objects.Keys.Count((k) => GetObjectTypeById(k) == GameObjectType.Player);
     }
 }
 

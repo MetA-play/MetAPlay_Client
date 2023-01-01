@@ -71,25 +71,28 @@ namespace Google.Protobuf.Protocol {
             "KAUSEgoKQmxvY2tJbmRleBgCIAEoBSI8ChJTX0RlbGV0ZUZsb29yQmxvY2sS",
             "EgoKRmxvb3JJbmRleBgBIAEoBRISCgpCbG9ja0luZGV4GAIgASgFIg4KDENf",
             "UGxheWVyRGVhZCIgCgxTX1BsYXllckRlYWQSEAoIUGxheWVySWQYASABKAUi",
-            "HQoJU19HYW1lRW5kEhAKCFdpbm5lcklkGAEgASgFKioKCVNjZW5lVHlwZRII",
-            "CgRNYWluEAASCQoFTG9iYnkQARIICgRHYW1lEAIqJwoIR2FtZVR5cGUSDAoI",
-            "QXZvaWRMb2cQABINCglEb05vdEZhbGwQASpACg5HYW1lT2JqZWN0VHlwZRII",
-            "CgROb25lEAASCgoGUGxheWVyEAESCAoEUm9vbRACEg4KClNvY2NlckJhbGwQ",
-            "Ayo+CgtPYmplY3RTdGF0ZRIICgRJZGxlEAASCAoETW92ZRABEggKBEp1bXAQ",
-            "AhIICgRTdHVuEAMSBwoDRGllEAQqMQoJR2FtZVN0YXRlEgsKB1dhaXRpbmcQ",
-            "ABILCgdQbGF5aW5nEAESCgoGRW5kaW5nEAIqMwoHTW92ZURpchIJCgVGcm9u",
-            "dBAAEggKBExlZnQQARIJCgVSaWdodBACEggKBEJhY2sQAyq9AwoFTXNnSWQS",
-            "FQoRQ19DUkVBVEVfUk9PTV9SRVEQABIVChFTX0NSRUFURV9ST09NX1JFUxAB",
-            "EhMKD0NfSk9JTl9ST09NX1JFURACEhMKD1NfSk9JTl9ST09NX1JFUxADEhAK",
-            "DFNfRU5URVJfR0FNRRAFEhAKDFNfTEVBVkVfR0FNRRAGEgsKB1NfU1BBV04Q",
-            "BxINCglTX0RFU1BBV04QCBIKCgZDX01PVkUQCRIKCgZTX01PVkUQChIKCgZD",
-            "X0NIQVQQCxIKCgZTX0NIQVQQDBIbChdDX1VQREFURV9HQU1FX1NUQVRFX1JF",
-            "URANEhsKF1NfVVBEQVRFX0dBTUVfU1RBVEVfUkVTEA4SEgoOQ19TRVRfVVNF",
-            "UklORk8QDxIUChBDX0hJVF9TT0NDRVJCQUxMEBASDgoKQ19TWU5DX1BPUxAR",
-            "Eg4KClNfU1lOQ19QT1MQEhIYChRDX0RFTEVURV9GTE9PUl9CTE9DSxATEhgK",
-            "FFNfREVMRVRFX0ZMT09SX0JMT0NLEBQSEQoNQ19QTEFZRVJfREVBRBAVEhEK",
-            "DVNfUExBWUVSX0RFQUQQFhIOCgpTX0dBTUVfRU5EEBdCG6oCGEdvb2dsZS5Q",
-            "cm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "HQoJU19HYW1lRW5kEhAKCFdpbm5lcklkGAEgASgFIhMKEUNfQ29sbGlkZU9i",
+            "c3RhY2xlIj4KD0NfU2V0U3Bhd25Qb2ludBIrCgpTcGF3blBvaW50GAEgASgL",
+            "MhcuUHJvdG9jb2wuVHJhbnNmb3JtSW5mbyoqCglTY2VuZVR5cGUSCAoETWFp",
+            "bhAAEgkKBUxvYmJ5EAESCAoER2FtZRACKjUKCEdhbWVUeXBlEgwKCEF2b2lk",
+            "TG9nEAASDQoJRG9Ob3RGYWxsEAESDAoIU3BlZWRSdW4QAipACg5HYW1lT2Jq",
+            "ZWN0VHlwZRIICgROb25lEAASCgoGUGxheWVyEAESCAoEUm9vbRACEg4KClNv",
+            "Y2NlckJhbGwQAyo+CgtPYmplY3RTdGF0ZRIICgRJZGxlEAASCAoETW92ZRAB",
+            "EggKBEp1bXAQAhIICgRTdHVuEAMSBwoDRGllEAQqMQoJR2FtZVN0YXRlEgsK",
+            "B1dhaXRpbmcQABILCgdQbGF5aW5nEAESCgoGRW5kaW5nEAIqMwoHTW92ZURp",
+            "chIJCgVGcm9udBAAEggKBExlZnQQARIJCgVSaWdodBACEggKBEJhY2sQAyrs",
+            "AwoFTXNnSWQSFQoRQ19DUkVBVEVfUk9PTV9SRVEQABIVChFTX0NSRUFURV9S",
+            "T09NX1JFUxABEhMKD0NfSk9JTl9ST09NX1JFURACEhMKD1NfSk9JTl9ST09N",
+            "X1JFUxADEhAKDFNfRU5URVJfR0FNRRAFEhAKDFNfTEVBVkVfR0FNRRAGEgsK",
+            "B1NfU1BBV04QBxINCglTX0RFU1BBV04QCBIKCgZDX01PVkUQCRIKCgZTX01P",
+            "VkUQChIKCgZDX0NIQVQQCxIKCgZTX0NIQVQQDBIbChdDX1VQREFURV9HQU1F",
+            "X1NUQVRFX1JFURANEhsKF1NfVVBEQVRFX0dBTUVfU1RBVEVfUkVTEA4SEgoO",
+            "Q19TRVRfVVNFUklORk8QDxIUChBDX0hJVF9TT0NDRVJCQUxMEBASDgoKQ19T",
+            "WU5DX1BPUxAREg4KClNfU1lOQ19QT1MQEhIYChRDX0RFTEVURV9GTE9PUl9C",
+            "TE9DSxATEhgKFFNfREVMRVRFX0ZMT09SX0JMT0NLEBQSEQoNQ19QTEFZRVJf",
+            "REVBRBAVEhEKDVNfUExBWUVSX0RFQUQQFhIOCgpTX0dBTUVfRU5EEBcSFgoS",
+            "Q19DT0xMSURFX09CU1RBQ0xFEBgSFQoRQ19TRVRfU1BBV05fUE9JTlQQGUIb",
+            "qgIYR29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.SceneType), typeof(global::Google.Protobuf.Protocol.GameType), typeof(global::Google.Protobuf.Protocol.GameObjectType), typeof(global::Google.Protobuf.Protocol.ObjectState), typeof(global::Google.Protobuf.Protocol.GameState), typeof(global::Google.Protobuf.Protocol.MoveDir), typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -122,7 +125,9 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DeleteFloorBlock), global::Google.Protobuf.Protocol.S_DeleteFloorBlock.Parser, new[]{ "FloorIndex", "BlockIndex" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_PlayerDead), global::Google.Protobuf.Protocol.C_PlayerDead.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_PlayerDead), global::Google.Protobuf.Protocol.S_PlayerDead.Parser, new[]{ "PlayerId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_GameEnd), global::Google.Protobuf.Protocol.S_GameEnd.Parser, new[]{ "WinnerId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_GameEnd), global::Google.Protobuf.Protocol.S_GameEnd.Parser, new[]{ "WinnerId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_CollideObstacle), global::Google.Protobuf.Protocol.C_CollideObstacle.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_SetSpawnPoint), global::Google.Protobuf.Protocol.C_SetSpawnPoint.Parser, new[]{ "SpawnPoint" }, null, null, null, null)
           }));
     }
     #endregion
@@ -141,6 +146,7 @@ namespace Google.Protobuf.Protocol {
   public enum GameType {
     [pbr::OriginalName("AvoidLog")] AvoidLog = 0,
     [pbr::OriginalName("DoNotFall")] DoNotFall = 1,
+    [pbr::OriginalName("SpeedRun")] SpeedRun = 2,
   }
 
   public enum GameObjectType {
@@ -204,6 +210,8 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("C_PLAYER_DEAD")] CPlayerDead = 21,
     [pbr::OriginalName("S_PLAYER_DEAD")] SPlayerDead = 22,
     [pbr::OriginalName("S_GAME_END")] SGameEnd = 23,
+    [pbr::OriginalName("C_COLLIDE_OBSTACLE")] CCollideObstacle = 24,
+    [pbr::OriginalName("C_SET_SPAWN_POINT")] CSetSpawnPoint = 25,
   }
 
   #endregion
@@ -5047,6 +5055,242 @@ namespace Google.Protobuf.Protocol {
             break;
           case 8: {
             WinnerId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class C_CollideObstacle : pb::IMessage<C_CollideObstacle> {
+    private static readonly pb::MessageParser<C_CollideObstacle> _parser = new pb::MessageParser<C_CollideObstacle>(() => new C_CollideObstacle());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C_CollideObstacle> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[30]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_CollideObstacle() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_CollideObstacle(C_CollideObstacle other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_CollideObstacle Clone() {
+      return new C_CollideObstacle(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C_CollideObstacle);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C_CollideObstacle other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C_CollideObstacle other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class C_SetSpawnPoint : pb::IMessage<C_SetSpawnPoint> {
+    private static readonly pb::MessageParser<C_SetSpawnPoint> _parser = new pb::MessageParser<C_SetSpawnPoint>(() => new C_SetSpawnPoint());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C_SetSpawnPoint> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[31]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_SetSpawnPoint() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_SetSpawnPoint(C_SetSpawnPoint other) : this() {
+      spawnPoint_ = other.spawnPoint_ != null ? other.spawnPoint_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_SetSpawnPoint Clone() {
+      return new C_SetSpawnPoint(this);
+    }
+
+    /// <summary>Field number for the "SpawnPoint" field.</summary>
+    public const int SpawnPointFieldNumber = 1;
+    private global::Google.Protobuf.Protocol.TransformInfo spawnPoint_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Google.Protobuf.Protocol.TransformInfo SpawnPoint {
+      get { return spawnPoint_; }
+      set {
+        spawnPoint_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C_SetSpawnPoint);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C_SetSpawnPoint other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(SpawnPoint, other.SpawnPoint)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (spawnPoint_ != null) hash ^= SpawnPoint.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (spawnPoint_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(SpawnPoint);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (spawnPoint_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SpawnPoint);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C_SetSpawnPoint other) {
+      if (other == null) {
+        return;
+      }
+      if (other.spawnPoint_ != null) {
+        if (spawnPoint_ == null) {
+          SpawnPoint = new global::Google.Protobuf.Protocol.TransformInfo();
+        }
+        SpawnPoint.MergeFrom(other.SpawnPoint);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (spawnPoint_ == null) {
+              SpawnPoint = new global::Google.Protobuf.Protocol.TransformInfo();
+            }
+            input.ReadMessage(SpawnPoint);
             break;
           }
         }
