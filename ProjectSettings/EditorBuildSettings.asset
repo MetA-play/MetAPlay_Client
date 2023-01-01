@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 8d56a00b2d0340547a4b5a8dc9fc04d4
   - enabled: 1
-    path: Assets/Scenes/LobbyTest.unity
-    guid: 9c595119f3bd49147b82524c1b3094b2
-  - enabled: 1
-    path: Assets/Scenes/Test/ChattingTestScene.unity
-    guid: 828fe9d15affa8543b279bf07fb03612
+    path: Assets/Scenes/Lobby.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Test/RoomSystemTest.unity
     guid: 0b1a0793171d68f4b88a9d79431b33f1

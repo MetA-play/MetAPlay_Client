@@ -3,6 +3,7 @@ using Define;
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -52,7 +53,8 @@ public class PlayerController : NetworkingObject
     public bool isSyncronizing;
 
     public bool isSit = false;
-    
+
+    public TMP_Text nickName_Text;
     private void Awake()
     {
         if (cam == null)
@@ -65,6 +67,7 @@ public class PlayerController : NetworkingObject
     public override void Start()
     {
         base.Start();
+        nickName_Text.text = GetComponent<PlayerInfo>().UserName;
     }
 
     void Update()

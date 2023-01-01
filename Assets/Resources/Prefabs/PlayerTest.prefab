@@ -634,6 +634,7 @@ MonoBehaviour:
   rotY: 0
   isSyncronizing: 0
   isSit: 0
+  nickName_Text: {fileID: 775148260893423849}
 --- !u!114 &775148261814908148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -689,6 +690,7 @@ MonoBehaviour:
   y_RotationSpeed: 1
   cursorLocked: 1
   cursorInputForLook: 1
+  Sensitive: 1
 --- !u!114 &775148261814908145
 MonoBehaviour:
   m_ObjectHideFlags: 0
