@@ -20,14 +20,17 @@ public class Log : NetworkingObject
         RotY = (int)transformInfo.Rot.Y;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            if (collision.gameObject.TryGetComponent(out Rigidbody rb))
+            if (other.TryGetComponent(out PlayerController pc))
             {
-                Debug.Log("Player Collision");
-                rb.AddForce(rb.velocity * 100);
+                if (pc.isMine)
+                {
+                    C_PlayerDead deadPacket = new C_PlayerDead();
+                    NetworkManager.Instance.Send(deadPacket);
+                }
             }
         }
     }

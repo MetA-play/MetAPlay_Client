@@ -74,6 +74,10 @@ public class PacketHandler
         {
             ObjectManager.Instance.Add(obj);
         }
+
+        GameScene gs = Object.FindObjectOfType<GameScene>();
+        if (gs != null)
+            gs.Init();
     }
     /// <summary>
     /// 2022. 12. 20. / Eunseong
@@ -169,12 +173,24 @@ public class PacketHandler
     public static void S_PlayerDeadHandler(PacketSession session, IMessage packet)
     {
         S_PlayerDead deadPacket = packet as S_PlayerDead;
-        Debug.Log(deadPacket.PlayerId);
+
+        GameObject obj = ObjectManager.Instance.FindById(deadPacket.PlayerId);
+        if (obj != null)
+            obj.SetActive(false);
     }
 
     public static void S_GameEndHandler(PacketSession session, IMessage packet)
     {
         S_GameEnd endGamePacket = packet as S_GameEnd;
-        Debug.Log(endGamePacket.WinnerId);
+        GameScene gameScene = Object.FindObjectOfType<GameScene>();
+        if (gameScene != null)
+        {
+            GameObject obj = ObjectManager.Instance.FindById(endGamePacket.WinnerId);
+            if (obj.TryGetComponent(out PlayerInfo playerInfo))
+            {
+                string winnerName = playerInfo.UserName;
+                gameScene.OnGameEnd(winnerName);
+            }
+        }
     }
 }

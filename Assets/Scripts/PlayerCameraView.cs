@@ -48,7 +48,7 @@ public class PlayerCameraView : MonoBehaviour
     [SerializeField] [Range(0f, 10f)] private float y_RotationSpeed = 1f;
 
     [Header("Mouse Cursor Settings")]
-    public bool cursorLocked = true;
+    public bool cursorLocked = false;
     public bool cursorInputForLook = true;
 
     void Start()

@@ -29,25 +29,17 @@ public class FloorBlock : MonoBehaviour
             yield return null;
         }
 
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnCollisionPlayer()
     {
         if (IsDeleted) return;
+        Debug.Log("발판 밟힘");
 
-        if (other.CompareTag("Player"))
-        {
-            if (other.TryGetComponent(out NetworkingObject player))
-            {
-                if (player.Id == ObjectManager.Instance.MyPlayer.Id)
-                {
-                    C_DeleteFloorBlock DFB = new C_DeleteFloorBlock();
-                    DFB.FloorIndex = FloorIndex;
-                    DFB.BlockIndex = BlockIndex;
-                    NetworkManager.Instance.Send(DFB);
-                }
-            }
-        }
+        C_DeleteFloorBlock DFB = new C_DeleteFloorBlock();
+        DFB.FloorIndex = FloorIndex;
+        DFB.BlockIndex = BlockIndex;
+        NetworkManager.Instance.Send(DFB);
     }
 }

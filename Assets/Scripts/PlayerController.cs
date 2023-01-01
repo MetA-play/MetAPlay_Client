@@ -298,6 +298,14 @@ public class PlayerController : NetworkingObject
         if (jump > 0)
             onJump();
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.TryGetComponent(out FloorBlock floorBlock))
+        {
+            floorBlock.OnCollisionPlayer();
+        }
+    }
 }
 
 
