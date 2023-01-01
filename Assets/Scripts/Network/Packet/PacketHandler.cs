@@ -74,6 +74,10 @@ public class PacketHandler
         {
             ObjectManager.Instance.Add(obj);
         }
+
+        GameScene gs = Object.FindObjectOfType<GameScene>();
+        if (gs != null)
+            gs.Init();
     }
     /// <summary>
     /// 2022. 12. 20. / Eunseong
@@ -96,19 +100,29 @@ public class PacketHandler
         ServerSession SS = session as ServerSession;
         S_Move move = packet as S_Move;
 
-        if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
+        GameObjectType type = ObjectManager.GetObjectTypeById(move.Id);
 
-        PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
-
-        if (player == null)
+        if (type == GameObjectType.Player)
         {
-            Debug.Log($"player not found in move   id: {move.Id}");
-            return;
-        }
+            if (ObjectManager.Instance.MyPlayer.Id == move.Id) return;
+
+            PlayerController player = ObjectManager.Instance.FindById(move.Id)?.GetComponent<PlayerController>();
+
+            if (player == null)
+            {
+                Debug.Log($"player not found in move   id: {move.Id}");
+                return;
+            }
         
-        // 만약 inputFlag를 사용한다면
-        player.inputFlag = move.InputFlag;
-        player.rotY = move.Transform.Rot.Y;
+            // 만약 inputFlag를 사용한다면
+            player.inputFlag = move.InputFlag;
+            player.rotY = move.Transform.Rot.Y;
+        }
+        else if (type == GameObjectType.None)
+        {
+            NetworkingObject obj = ObjectManager.Instance.FindById(move.Id).GetComponent<NetworkingObject>();
+            obj.UpdateTransform(move.Transform);
+        }
     }
     public static void S_ChatHandler(PacketSession session, IMessage packet)
     {
@@ -128,6 +142,7 @@ public class PacketHandler
     }
     public static void S_SyncPosHandler(PacketSession session, IMessage packet)
     {
+        Debug.Log("sync");
         ServerSession SS = session as ServerSession;
         S_SyncPos sync = packet as S_SyncPos;
 
@@ -148,16 +163,35 @@ public class PacketHandler
         }
 
     }
+
     public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)
     {
-        ServerSession SS = session as ServerSession;
+        if (FloorBlockController.Instance == null) return;
+        S_DeleteFloorBlock DFB = packet as S_DeleteFloorBlock;
+        FloorBlockController.Instance.DeleteFloorBlock(DFB.FloorIndex, DFB.BlockIndex);
     }
+
     public static void S_PlayerDeadHandler(PacketSession session, IMessage packet)
     {
-        ServerSession SS = session as ServerSession;
+        S_PlayerDead deadPacket = packet as S_PlayerDead;
+
+        GameObject obj = ObjectManager.Instance.FindById(deadPacket.PlayerId);
+        if (obj != null)
+            obj.SetActive(false);
     }
+
     public static void S_GameEndHandler(PacketSession session, IMessage packet)
     {
-        ServerSession SS = session as ServerSession;
+        S_GameEnd endGamePacket = packet as S_GameEnd;
+        GameScene gameScene = Object.FindObjectOfType<GameScene>();
+        if (gameScene != null)
+        {
+            GameObject obj = ObjectManager.Instance.FindById(endGamePacket.WinnerId);
+            if (obj.TryGetComponent(out PlayerInfo playerInfo))
+            {
+                string winnerName = playerInfo.UserName;
+                gameScene.OnGameEnd(winnerName);
+            }
+        }
     }
 }

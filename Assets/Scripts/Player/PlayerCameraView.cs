@@ -48,7 +48,7 @@ public class PlayerCameraView : MonoBehaviour
     [SerializeField] [Range(0f, 10f)] private float y_RotationSpeed = 1f;
 
     [Header("Mouse Cursor Settings")]
-    public bool cursorLocked = true;
+    public bool cursorLocked = false;
     public bool cursorInputForLook = true;
     [Range(0f, 10f)] public float Sensitive = 1f;
 
@@ -102,7 +102,7 @@ public class PlayerCameraView : MonoBehaviour
         targetYaw = ClampAngle(targetYaw, float.MinValue, float.MaxValue);
         targetPitch = ClampAngle(targetPitch, BottomClamp, TopClamp);
 
-        playerCamTarget.transform.rotation = Quaternion.Euler(-(targetPitch + CameraAngleOverride), targetYaw, 0.0f);
+        playerCamTarget.transform.rotation = Quaternion.Euler(targetPitch + CameraAngleOverride, targetYaw, 0.0f);
 
     }
 

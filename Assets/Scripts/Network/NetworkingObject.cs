@@ -20,6 +20,11 @@ public class NetworkingObject : MonoBehaviour
         
     }
 
+    public virtual void UpdateTransform(TransformInfo transformInfo)
+    {
+
+    }
+
     public IEnumerator PosSyncSendCor()
     {
 
