@@ -52,6 +52,7 @@ public class LobbyUIManager : MonoBehaviour
             activeWindow -= 1;
             if (activeWindow == 0)
             {
+                Debug.Log("lock");
                 cam.cursorLocked = true;
                 cam.cursorInputForLook = true;
             }
