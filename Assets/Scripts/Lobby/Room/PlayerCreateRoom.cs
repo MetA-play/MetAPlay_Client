@@ -10,7 +10,7 @@ public class PlayerCreateRoom : MonoBehaviour
     public static PlayerCreateRoom Instance { get { return instance; } }
 
     [SerializeField] private GameObject roomPanel;
-    [SerializeField] private PlayerCameraView playerCam;
+    [SerializeField] public PlayerCameraView playerCam;
     [SerializeField] private LobbyUIManager uiManager;
     [Header("Selected Game Button")]
     public RoomButton selectedButton;
