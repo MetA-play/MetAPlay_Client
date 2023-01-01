@@ -48,11 +48,12 @@ public class MainSceneManager : MonoBehaviour
         set.Info.BodyPartsIdx = _bodyPartIdx;
         set.Info.FootPartsIdx= _footPartIdx;
         set.Info.BodyColor = new MetColor() { R = bodyMet.color.r, G = bodyMet.color.g,B = bodyMet.color.b};
+        if (cloakMet != null)
         set.Info.CloakColor = new MetColor() { R = cloakMet.color.r, G = cloakMet.color.g,B = cloakMet.color.b};
         
         NetworkManager.Instance.UserInfo = set.Info;
 
-        SceneManager.LoadScene("ChattingTestScene");
+        SceneManager.LoadScene("Lobby");
     }
 
     public void OnSetUserInfo()

@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 775148261814908111}
   - component: {fileID: 775148261814908108}
   - component: {fileID: 775148261814908109}
+  - component: {fileID: 5332848517791168117}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Player
@@ -631,6 +632,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   inputFlag: 0
   rotY: 0
+  isSyncronizing: 0
+  isSit: 0
 --- !u!114 &775148261814908148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,6 +775,20 @@ MonoBehaviour:
   _footPartsIdx: 0
   BodyColor: {r: 0, g: 0, b: 0, a: 0}
   CloackColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!136 &5332848517791168117
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775148261814908150}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.1
+  m_Height: 4.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &775148261911401310
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,9 +17,11 @@ public class ColorPreview : MonoBehaviour
 
     private void Start()
     {
-        previewGraphic.color = colorPicker.color;
-        colorPicker.onColorChanged += OnColorChanged;
-
+        if (colorPicker != null)
+        {
+            previewGraphic.color = colorPicker.color;
+            colorPicker.onColorChanged += OnColorChanged;
+        }
         switch (MT)
         {
             case MetType.Cloak:
