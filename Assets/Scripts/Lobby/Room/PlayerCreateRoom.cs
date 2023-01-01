@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Google.Protobuf.Protocol;
 
 public class PlayerCreateRoom : MonoBehaviour
 {
+    static PlayerCreateRoom instance;
+    public static PlayerCreateRoom Instance { get { return instance; } }
+
     [SerializeField] private GameObject roomPanel;
-    [SerializeField] private PlayerCameraView playerCam;
+    [SerializeField] public PlayerCameraView playerCam;
 
     [Header("Selected Game Button")]
     public RoomButton selectedButton;
@@ -14,17 +18,15 @@ public class PlayerCreateRoom : MonoBehaviour
     [Header("RoomName InputField")]
     [SerializeField] private TMP_InputField roomNameInputField;
 
-    [Header("GameRooms")]
-    [SerializeField] private List<GameObject> gameRooms;
-
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
     void Start()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players)
-        {
-            if (player.GetComponent<NetworkingObject>().isMine)
-                playerCam = player.GetComponent<PlayerCameraView>();
-        }
     }
 
     void Update()
@@ -74,9 +76,14 @@ public class PlayerCreateRoom : MonoBehaviour
             return;
         }
         // Create Object
-        GameObject obj = Instantiate(gameRooms[(int)selectedButton.kind]);
+        RoomSetting setting = new RoomSetting();
+        setting.MaxPlayer = 8;
+        setting.Name = roomNameInputField.text;
+        setting.GameType = (GameType)((int)selectedButton.kind);
+        NetworkManager.Instance.CreateRoom(setting);
+        /*GameObject obj = Instantiate(gameRooms[(int)selectedButton.kind]);
         obj.transform.position = new Vector3(playerCam.transform.position.x, -2.5f, playerCam.transform.position.z);
-        obj.GetComponent<GameRoom>().kind = selectedButton.kind;
+        obj.GetComponent<GameRoom>().kind = selectedButton.kind;*/
         CloseRoomPanel();
     }
 }
