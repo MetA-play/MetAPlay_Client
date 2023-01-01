@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyUIManager : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class LobbyUIManager : MonoBehaviour
 
     [Header("Window")]
     public GameObject menuObject;
+
+    [Header("Slider")]
+    [SerializeField] private Slider SFXSlider;
+    [SerializeField] private Slider BGMSlider;
 
     void Start()
     {
@@ -71,6 +76,8 @@ public class LobbyUIManager : MonoBehaviour
     public void CloseMenu()
     {
         menuObject.SetActive(false);
+        SoundManager.instance.SetSFXLevel(SFXSlider.value);
+        SoundManager.instance.SetBGMLevel(BGMSlider.value);
         CursorLock(true);
     }
 
