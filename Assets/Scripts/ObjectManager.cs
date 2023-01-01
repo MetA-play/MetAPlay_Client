@@ -51,7 +51,8 @@ public class ObjectManager : MonoBehaviour
             pInfo._headPartsIdx = info.UserData.HeadPartsIdx;
             pInfo._bodyPartsIdx = info.UserData.BodyPartsIdx;
             pInfo._footPartsIdx = info.UserData.FootPartsIdx;
-            pInfo.BodyColor = new Color(info.UserData.BodyColor.R, info.UserData.BodyColor.G, info.UserData.BodyColor.B);
+            if (info.UserData.BodyColor != null)
+                pInfo.BodyColor = new Color(info.UserData.BodyColor.R, info.UserData.BodyColor.G, info.UserData.BodyColor.B);   
             if(info.UserData.CloakColor != null)
                 pInfo.CloackColor = new Color(info.UserData.CloakColor.R, info.UserData.CloakColor.G, info.UserData.CloakColor.B);
             if (myPlayer)
