@@ -7,7 +7,7 @@ public class PlayerCreateRoom : MonoBehaviour
 {
     [SerializeField] private GameObject roomPanel;
     [SerializeField] private PlayerCameraView playerCam;
-
+    [SerializeField] private LobbyUIManager uiManager;
     [Header("Selected Game Button")]
     public RoomButton selectedButton;
 
@@ -19,6 +19,7 @@ public class PlayerCreateRoom : MonoBehaviour
 
     void Start()
     {
+        uiManager = GetComponent<LobbyUIManager>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach(GameObject player in players)
         {
@@ -42,8 +43,7 @@ public class PlayerCreateRoom : MonoBehaviour
     void OpenRoomPanel()
     {
         roomPanel.SetActive(true);
-        playerCam.cursorLocked = false;
-        playerCam.cursorInputForLook = false;
+        uiManager.CursorLock(false);
     }
 
     /// <summary>
@@ -53,8 +53,7 @@ public class PlayerCreateRoom : MonoBehaviour
     public void CloseRoomPanel()
     {
         roomPanel.SetActive(false);
-        playerCam.cursorInputForLook = true;
-        playerCam.cursorLocked = true;
+        uiManager.CursorLock(true);
     }
 
     /// <summary>
