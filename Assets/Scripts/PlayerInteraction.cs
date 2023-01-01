@@ -42,7 +42,6 @@ public class PlayerInteraction : MonoBehaviour
     void CheckBench()
     {
         Collider[] benches = Physics.OverlapSphere(transform.position, interactionRadius, 1 << layerBench);
-        Debug.Log(benches.Length);
         if (benches.Length > 0)
         {
             closeTrans = ClosetObject(benches);
