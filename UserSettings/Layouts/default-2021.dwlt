@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 76
+  controlID: 107
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 196
+  controlID: 19
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,8 +165,8 @@ MonoBehaviour:
     y: 0
     width: 1017.6
     height: 660
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -220,8 +220,8 @@ MonoBehaviour:
     y: 0
     width: 272.80005
     height: 1138.8
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -246,8 +246,8 @@ MonoBehaviour:
     y: 0
     width: 757.6
     height: 1138.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -478,9 +478,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.9079484, y: 2.0286782, z: -0.7940159}
+    m_Target: {x: -6.1295147, y: 6.869205, z: 4.8265705}
     speed: 2
-    m_Value: {x: -1.9079484, y: 2.0286782, z: -0.7940159}
+    m_Value: {x: -6.1295147, y: 6.869205, z: 4.8265705}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -527,9 +527,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.11498133, y: -0.68768656, z: 0.11147328, w: -0.70844084}
+    m_Target: {x: -0.15526307, y: -0.07505559, z: 0.011717618, w: -0.9851829}
     speed: 2
-    m_Value: {x: -0.11495557, y: -0.6875325, z: 0.1114483, w: -0.7082821}
+    m_Value: {x: -0.15230541, y: -0.0721165, z: 0.011032677, w: -0.9856372}
   m_Size:
     m_Target: 1.9125988
     speed: 2
@@ -772,22 +772,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sehyeon/DoNotFall/Scripts
+    - Assets/Sehyeon/SpeedRun
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Sehyeon/DoNotFall/Scripts
+  - Assets/Sehyeon/SpeedRun
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\workspace\Github\MetAplay\MetAPlay_Client
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 62.19995}
-    m_SelectedIDs: 82c80100
-    m_LastClickedID: 116866
-    m_ExpandedIDs: 0000000020690000226900002469000026690000286900002a690000946a000000ca9a3b
+    m_SelectedIDs: 66690000
+    m_LastClickedID: 26982
+    m_ExpandedIDs: 0000000030690000326900003469000036690000386900003a69000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -815,7 +815,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000020690000226900002469000026690000286900002a690000
+    m_ExpandedIDs: 0000000030690000326900003469000036690000386900003a690000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -932,18 +932,18 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 266cffff786cffffbc73ffffec77ffff3e78ffffd281ffff4685ffff9885ffff0688ffff1cceffff9cdbffffa0dbffffecdbffff2efbffff806300008e6700002204010028090200
+      m_ExpandedIDs: 96dcffff7ef2ffff2efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: PlayerTest 1(Clone)
-        m_OriginalName: PlayerTest 1(Clone)
+        m_Name: SpawnPoint3
+        m_OriginalName: SpawnPoint3
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -38916
+        m_UserData: -9444
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
