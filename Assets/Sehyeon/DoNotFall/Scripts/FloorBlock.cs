@@ -18,7 +18,6 @@ public class FloorBlock : MonoBehaviour
 
     private IEnumerator DeleteAnimation()
     {
-        IsDeleted = true;
         Vector3 currPos = transform.position;
         Vector3 destPos = new Vector3(currPos.x, currPos.y - 1f, currPos.z);
 
@@ -35,6 +34,7 @@ public class FloorBlock : MonoBehaviour
     public void OnCollisionPlayer()
     {
         if (IsDeleted) return;
+        IsDeleted = true;
 
         C_DeleteFloorBlock DFB = new C_DeleteFloorBlock();
         DFB.FloorIndex = FloorIndex;

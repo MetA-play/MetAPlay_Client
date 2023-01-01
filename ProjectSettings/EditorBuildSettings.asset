@@ -17,8 +17,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GameroomScene.unity
     guid: 97982e539d0443a49ad678f4605bb8f4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Sehyeon/AvoidLog/AvoidLog.unity
     guid: cc499317c1f5d0145b095d5ebee7f102
+  - enabled: 1
+    path: Assets/Sehyeon/DoNotFall/DoNotFall.unity
+    guid: a7671a2174bf6ee45a0d9fa3171204a9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 0c52a1c069c73654c8c02ed8b590995b, type: 2}
