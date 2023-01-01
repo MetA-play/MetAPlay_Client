@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class LobbyUIManager : MonoBehaviour
 {
+
+    public static LobbyUIManager instance;
     [SerializeField] private int activeWindow;
-    [SerializeField] private Transform player;
+    [SerializeField] public Transform player;
 
     [Header("Window")]
     public GameObject menuObject;
@@ -15,14 +17,15 @@ public class LobbyUIManager : MonoBehaviour
     [SerializeField] private Slider SFXSlider;
     [SerializeField] private Slider BGMSlider;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
     void Start()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject obj in players)
-        {
-            if (obj.GetComponent<NetworkingObject>().isMine)
-                player = obj.GetComponent<Transform>();
-        }
     }
 
     void Update()

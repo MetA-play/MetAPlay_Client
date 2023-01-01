@@ -40,7 +40,7 @@ public class ObjectManager : MonoBehaviour
 
         if (Type == GameObjectType.Player)
         {
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest 1");
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
             obj.GetComponent<NetworkingObject>().Id = info.Id;
 
@@ -61,7 +61,7 @@ public class ObjectManager : MonoBehaviour
                 MyPlayer = obj.GetComponent<PlayerController>();
                 MyPlayer.isMine = true;
                 PlayerCreateRoom.Instance.playerCam = ObjectManager.Instance.MyPlayer.GetComponent<PlayerCameraView>();
-
+                LobbyUIManager.instance.player = obj.transform;
                 //isMine 활성화
             }
             else
