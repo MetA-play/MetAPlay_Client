@@ -9,6 +9,8 @@ public class LobbyManager : MonoBehaviour
     static LobbyManager instance;
     public static LobbyManager Instance { get { return instance; } }
 
+    [Header("BGMClip")]
+    [SerializeField] private AudioClip LobbyBGMClip;
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class LobbyManager : MonoBehaviour
         C_SetUserinfo set = new C_SetUserinfo();
         set.Info = NetworkManager.Instance.UserInfo;
         NetworkManager.Instance.Send(set);
+        SoundManager.instance.BGMPlay(LobbyBGMClip);
     }
 
 
