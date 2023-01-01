@@ -305,9 +305,11 @@ public class PlayerController : NetworkingObject
         {
             floorBlock.OnCollisionPlayer();
         }
-        else if (hit.gameObject.layer == LayerMask.GetMask("Obstacle"))
+        else if (hit.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            
+            Debug.Log("Collide");
+            C_CollideObstacle collidePacket = new C_CollideObstacle();
+            NetworkManager.Instance.Send(collidePacket);
         }
     }
 }

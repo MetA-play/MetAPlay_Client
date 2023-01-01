@@ -13,6 +13,7 @@ public class SpawnPoint : MonoBehaviour
             {
                 if (obj.isMine)
                 {
+                    Debug.Log("IsMine");
                     TransformInfo spawnPoint = new TransformInfo
                     {
                         Pos = new Vector() { X = transform.position.x, Y = transform.position.y, Z = transform.position.z }

@@ -142,6 +142,7 @@ public class PacketHandler
     }
     public static void S_SyncPosHandler(PacketSession session, IMessage packet)
     {
+        Debug.Log("sync");
         ServerSession SS = session as ServerSession;
         S_SyncPos sync = packet as S_SyncPos;
 
