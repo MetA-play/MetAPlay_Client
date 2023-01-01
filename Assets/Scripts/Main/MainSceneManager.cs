@@ -53,7 +53,7 @@ public class MainSceneManager : MonoBehaviour
         
         NetworkManager.Instance.UserInfo = set.Info;
 
-        SceneManager.LoadScene("LobbyTest");
+        SceneManager.LoadScene("Lobby");
     }
 
     public void OnSetUserInfo()
