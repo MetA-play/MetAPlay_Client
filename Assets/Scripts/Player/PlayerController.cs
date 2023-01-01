@@ -46,6 +46,9 @@ public class PlayerController : NetworkingObject
     [SerializeField] private Animator anim;
 
 
+    [Header("AUdioClip")]
+    [SerializeField] private AudioClip jumpClip;
+
     int prev_inputFlag;
     public int inputFlag;
     public float rotY;
@@ -266,6 +269,8 @@ public class PlayerController : NetworkingObject
         playerStateManager.State = PlayerState.Move;
         // Animation
         anim.SetTrigger("Jump");
+        // AudioClip
+        SoundManager.instance.SFXPlay("Jump", jumpClip);
     }
 
     /// <summary>

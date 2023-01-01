@@ -17,9 +17,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        if (netObj.isMine)
-            DontDestroyOnLoad(this.gameObject);
-        else
+        if (!netObj.isMine)
             Destroy(this);
     }
 
@@ -29,7 +27,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void SetSFXLevel(float level)
     {
-        mixer.SetFloat("SFX", Mathf.Log10(level));
+        mixer.SetFloat("SFX", level);
     }
     
     /// <summary>
@@ -38,7 +36,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void SetBGMLevel(float level)
     {
-        mixer.SetFloat("BGM", Mathf.Log10(level));
+        mixer.SetFloat("BGM", level);
     }
 
     /// <summary>
