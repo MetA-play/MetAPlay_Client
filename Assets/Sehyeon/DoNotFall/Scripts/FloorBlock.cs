@@ -35,7 +35,6 @@ public class FloorBlock : MonoBehaviour
     public void OnCollisionPlayer()
     {
         if (IsDeleted) return;
-        Debug.Log("발판 밟힘");
 
         C_DeleteFloorBlock DFB = new C_DeleteFloorBlock();
         DFB.FloorIndex = FloorIndex;

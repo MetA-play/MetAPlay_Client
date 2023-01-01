@@ -21,6 +21,7 @@ public class FloorBlockController : MonoBehaviour
 
     public void DeleteFloorBlock(int floorIndex, int blockIndex)
     {
+        Debug.Log($"[{floorIndex}, {blockIndex}]");
         FloorBlocks[floorIndex].Blocks[blockIndex].OnDelete();
     }
 }
