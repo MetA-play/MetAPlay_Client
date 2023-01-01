@@ -35,17 +35,17 @@ public class CustomizationPlayer : MonoBehaviour
             if(!MR[i].gameObject.CompareTag("NotColor"))
                 MR[i].material.color = color;
         }
-        if (head >= 0)
-            Instantiate(Heads[head], HeadCustom);
-        if (body >= 0)
+        if (head > 0)
+            Instantiate(Heads[head-1], HeadCustom);
+        if (body > 0)
         { 
-            GameObject Cloak = Instantiate(Bodys[body], BodyCustom);
+            GameObject Cloak = Instantiate(Bodys[body - 1], BodyCustom);
             MeshRenderer R = Cloak.GetComponentInChildren<MeshRenderer>();
             R.material = Instantiate(R.material);
             if (body == 1)
                 R.material.color = cloak;
         }
-        if (leg >= 0)
-            Instantiate(Legs[leg], LegCustom);
+        if (leg > 0)
+            Instantiate(Legs[leg-1], LegCustom);
     }
 }
