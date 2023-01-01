@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class LobbyUIManager : MonoBehaviour
 {
-    public bool IsLockCursor;
     [SerializeField] private int activeWindow;
     [SerializeField] private Transform player;
 
