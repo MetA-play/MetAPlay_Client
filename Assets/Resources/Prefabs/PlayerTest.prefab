@@ -805,7 +805,7 @@ MonoBehaviour:
   y_RotationSpeed: 1
   cursorLocked: 1
   cursorInputForLook: 1
-  Sensitive: 1
+  Sensitive: 7
 --- !u!114 &775148261814908145
 MonoBehaviour:
   m_ObjectHideFlags: 0
