@@ -28,6 +28,7 @@ public class RoomManager : MonoBehaviour
                 case GameState.Playing:
                     // 게임에 따른 맵 소환
                     Instantiate(DoNotFallMap);
+                    WaitingRoom.SetActive(false);
                     winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
                     winnerUI.gameObject.SetActive(false);
                     break;
