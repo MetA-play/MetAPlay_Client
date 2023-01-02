@@ -731,17 +731,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStaticObject: 0
-  speed: 5
+  speed: 12.5
   jump: 1
   ground:
     serializedVersion: 2
     m_Bits: 64
-  jumpHeight: 3
+  jumpHeight: 5
   jumpTimeout: 0.07
   cam: {fileID: 775148261626127453}
   targetRotation: 0
   rotationVelocity: 0
-  gravity: -9.81
+  gravity: -15
   verticalVelocity: 0
   anim: {fileID: 0}
   jumpClip: {fileID: 0}
@@ -805,7 +805,7 @@ MonoBehaviour:
   y_RotationSpeed: 1
   cursorLocked: 1
   cursorInputForLook: 1
-  Sensitive: 7
+  Sensitive: 9
 --- !u!114 &775148261814908145
 MonoBehaviour:
   m_ObjectHideFlags: 0
