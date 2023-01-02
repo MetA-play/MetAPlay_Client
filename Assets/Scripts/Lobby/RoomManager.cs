@@ -27,18 +27,7 @@ public class RoomManager : MonoBehaviour
                     break;
                 case GameState.Playing:
                     // 게임에 따른 맵 소환
-                    switch (Setting.GameType)
-                    {
-                        case GameType.AvoidLog:
-                            Instantiate(AvoidLogMap);
-                            break;
-                        case GameType.DoNotFall:
-                            Instantiate(DoNotFallMap);
-                            break;
-                        case GameType.SpeedRun:
-                            Instantiate(SpeedRunMap);
-                            break;
-                    }
+                    Instantiate(DoNotFallMap);
                     winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
                     winnerUI.gameObject.SetActive(false);
                     break;
