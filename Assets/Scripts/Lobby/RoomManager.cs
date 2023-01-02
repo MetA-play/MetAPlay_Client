@@ -69,6 +69,7 @@ public class RoomManager : MonoBehaviour
     {
         NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoom.Id);
         Setting = NetworkManager.Instance.JoinedRoom.Setting;
+        Debug.Log(Setting.GameType.ToString());
     }
 
     void Update()

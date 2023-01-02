@@ -38,7 +38,7 @@ public class PacketHandler
     {
         ServerSession SS = session as ServerSession;
         S_JoinRoomRes res = packet as S_JoinRoomRes;
-
+        NetworkManager.Instance.JoinedRoom = res.Info;
     }
     /// <summary>
     /// 2022. 12. 20. / Eunseong
