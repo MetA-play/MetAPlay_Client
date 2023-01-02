@@ -13,6 +13,11 @@ public class RoomManager : MonoBehaviour
     static RoomManager instance;
     public static RoomManager Instance { get { return instance; } }
     public RoomSetting Setting;
+
+    public GameObject AvoidLogMap;
+    public GameObject DoNotFallMap;
+    public GameObject SpeedRunMap;
+
     GameState state;
     public GameState State { get { return state; } set
         {
@@ -22,8 +27,18 @@ public class RoomManager : MonoBehaviour
                     break;
                 case GameState.Playing:
                     // 게임에 따른 맵 소환
-                    GameObject gameMap = Resources.Load<GameObject>($"Prefabs/Game/{Setting.GameType.ToString()}");
-                    GameMap = Instantiate(gameMap);
+                    switch (Setting.GameType)
+                    {
+                        case GameType.AvoidLog:
+                            Instantiate(AvoidLogMap);
+                            break;
+                        case GameType.DoNotFall:
+                            Instantiate(DoNotFallMap);
+                            break;
+                        case GameType.SpeedRun:
+                            Instantiate(SpeedRunMap);
+                            break;
+                    }
                     winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
                     winnerUI.gameObject.SetActive(false);
                     break;

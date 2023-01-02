@@ -1091,6 +1091,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitingRoom: {fileID: 824273313}
   GameMap: {fileID: 0}
+  AvoidLogMap: {fileID: 157752389960967304, guid: e8d15c12ba3a4174c89bacd55c20421c, type: 3}
+  DoNotFallMap: {fileID: 7543181567303004994, guid: f14b12308867d1948b270056d37ccc55, type: 3}
+  SpeedRunMap: {fileID: 7672612645821256486, guid: 94d5fa0a10f02264f9c8bbebc44f144e, type: 3}
 --- !u!1 &1646407404
 GameObject:
   m_ObjectHideFlags: 0
