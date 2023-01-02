@@ -44,7 +44,7 @@ public class LobbyUIManager : MonoBehaviour
     public void CursorLock(bool locking)
     {
         player.TryGetComponent<PlayerCameraView>(out PlayerCameraView cam);
-        if (locking)
+        if (!locking)
         {
             activeWindow += 1;
             cam.cursorInputForLook = false;

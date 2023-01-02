@@ -19987,6 +19987,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigTree (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2192669576203951941, guid: 483b9f831bca70b4eb988587c6d0413e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977928191294630388, guid: 483b9f831bca70b4eb988587c6d0413e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6989104267213688179, guid: 483b9f831bca70b4eb988587c6d0413e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -20054,6 +20062,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6989104267213688179, guid: 483b9f831bca70b4eb988587c6d0413e, type: 3}
   m_PrefabInstance: {fileID: 1831926395}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1831926397 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2192669576203951941, guid: 483b9f831bca70b4eb988587c6d0413e, type: 3}
+  m_PrefabInstance: {fileID: 1831926395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1831926398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5977928191294630388, guid: 483b9f831bca70b4eb988587c6d0413e, type: 3}
+  m_PrefabInstance: {fileID: 1831926395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1831926399
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831926397}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6790348962060567979, guid: c0e9e1e87ab3fe248b7c7d90a8eaee14, type: 3}
+--- !u!64 &1831926400
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831926398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4568990881291523330, guid: c0e9e1e87ab3fe248b7c7d90a8eaee14, type: 3}
 --- !u!1 &1832145856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6277282614459366572, guid: e96cea02f1893c04d99ec74e810a9d78, type: 3}
