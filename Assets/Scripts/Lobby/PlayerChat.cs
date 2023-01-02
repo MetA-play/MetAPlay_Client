@@ -20,8 +20,7 @@ public class PlayerChat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-            Chatting("TEST","User1");
+
     }
 
     /// <summary>
