@@ -24,6 +24,8 @@ public class RoomManager : MonoBehaviour
                     // 게임에 따른 맵 소환
                     GameObject gameMap = Resources.Load<GameObject>($"Prefabs/Game/{Setting.GameType.ToString()}");
                     GameMap = Instantiate(gameMap);
+                    winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
+                    winnerUI.gameObject.SetActive(false);
                     break;
                 case GameState.Ending:
                     // 결과 추가
@@ -52,8 +54,6 @@ public class RoomManager : MonoBehaviour
     {
         NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoom.Id);
         Setting = NetworkManager.Instance.JoinedRoom.Setting;
-        winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
-        winnerUI.gameObject.SetActive(false);
     }
 
     void Update()
