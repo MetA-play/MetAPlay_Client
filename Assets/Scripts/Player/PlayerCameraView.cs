@@ -97,7 +97,7 @@ public class PlayerCameraView : MonoBehaviour
             float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
             targetYaw += look.x * deltaTimeMultiplier * Sensitive;
-            targetPitch += look.y * deltaTimeMultiplier * Sensitive;
+            targetPitch -= look.y * deltaTimeMultiplier * Sensitive;
         }
         targetYaw = ClampAngle(targetYaw, float.MinValue, float.MaxValue);
         targetPitch = ClampAngle(targetPitch, BottomClamp, TopClamp);
