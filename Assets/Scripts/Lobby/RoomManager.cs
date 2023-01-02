@@ -53,6 +53,7 @@ public class RoomManager : MonoBehaviour
         NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoom.Id);
         Setting = NetworkManager.Instance.JoinedRoom.Setting;
         winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
+        winnerUI.gameObject.SetActive(false);
     }
 
     void Update()
