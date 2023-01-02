@@ -50,7 +50,7 @@ public class PacketHandler
     {   
         ServerSession SS = session as ServerSession;
         S_EnterGame enter = packet as S_EnterGame;
-
+        Debug.Log("EnterGame");
         ObjectManager.Instance.Add(enter.Player, true);
         Debug.Log("Mine Generate");
 
@@ -161,7 +161,7 @@ public class PacketHandler
         {
             obj.GetComponent<PlayerController>().isSyncronizing = true;
         }
-
+        
     }
 
     public static void S_DeleteFloorBlockHandler(PacketSession session, IMessage packet)

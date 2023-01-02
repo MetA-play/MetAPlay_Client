@@ -22,8 +22,8 @@ public class RoomManager : MonoBehaviour
                     break;
                 case GameState.Playing:
                     // 게임에 따른 맵 소환
-                    WaitingRoom.SetActive(false);
-                    GameMap.SetActive(true);
+                    GameObject gameMap = Resources.Load<GameObject>($"Prefabs/Game/{Setting.GameType.ToString()}");
+                    GameMap = Instantiate(gameMap);
                     break;
                 case GameState.Ending:
                     // 결과 추가
@@ -52,10 +52,6 @@ public class RoomManager : MonoBehaviour
     {
         NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoom.Id);
         Setting = NetworkManager.Instance.JoinedRoom.Setting;
-
-        GameObject gameMap = Resources.Load<GameObject>($"Prefabs/Game/{Setting.GameType.ToString()}");
-        GameMap = Instantiate(gameMap);
-        GameMap.SetActive(false);
         winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
     }
 
