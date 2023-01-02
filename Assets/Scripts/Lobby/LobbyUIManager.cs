@@ -7,7 +7,6 @@ public class LobbyUIManager : MonoBehaviour
 {
 
     public static LobbyUIManager instance;
-    [SerializeField] private int activeWindow;
     [SerializeField] public Transform player;
 
     [Header("Window")]
@@ -46,19 +45,14 @@ public class LobbyUIManager : MonoBehaviour
         player.TryGetComponent<PlayerCameraView>(out PlayerCameraView cam);
         if (!locking)
         {
-            activeWindow += 1;
             cam.cursorInputForLook = false;
             cam.cursorLocked = false;
         }
         else
         {
-            activeWindow -= 1;
-            if (activeWindow == 0)
-            {
-                Debug.Log("lock");
                 cam.cursorLocked = true;
                 cam.cursorInputForLook = true;
-            }
+            
         }
     }
 
