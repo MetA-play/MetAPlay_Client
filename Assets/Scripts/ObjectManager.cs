@@ -40,7 +40,7 @@ public class ObjectManager : MonoBehaviour
 
         if (Type == GameObjectType.Player)
         {
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest 1");
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerTest");
             GameObject obj = Instantiate(prefab, new Vector3(info.Transform.Pos.X, info.Transform.Pos.Y, info.Transform.Pos.Z), Quaternion.identity);
             obj.GetComponent<NetworkingObject>().Id = info.Id;
 
@@ -51,7 +51,8 @@ public class ObjectManager : MonoBehaviour
             pInfo._headPartsIdx = info.UserData.HeadPartsIdx;
             pInfo._bodyPartsIdx = info.UserData.BodyPartsIdx;
             pInfo._footPartsIdx = info.UserData.FootPartsIdx;
-            pInfo.BodyColor = new Color(info.UserData.BodyColor.R, info.UserData.BodyColor.G, info.UserData.BodyColor.B);
+            if (info.UserData.BodyColor != null)
+                pInfo.BodyColor = new Color(info.UserData.BodyColor.R, info.UserData.BodyColor.G, info.UserData.BodyColor.B);   
             if(info.UserData.CloakColor != null)
                 pInfo.CloackColor = new Color(info.UserData.CloakColor.R, info.UserData.CloakColor.G, info.UserData.CloakColor.B);
             if (myPlayer)
@@ -60,7 +61,7 @@ public class ObjectManager : MonoBehaviour
                 MyPlayer = obj.GetComponent<PlayerController>();
                 MyPlayer.isMine = true;
                 PlayerCreateRoom.Instance.playerCam = ObjectManager.Instance.MyPlayer.GetComponent<PlayerCameraView>();
-
+                LobbyUIManager.instance.player = obj.transform;
                 //isMine 활성화
             }
             else
