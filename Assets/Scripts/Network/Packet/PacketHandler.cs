@@ -183,15 +183,11 @@ public class PacketHandler
     public static void S_GameEndHandler(PacketSession session, IMessage packet)
     {
         S_GameEnd endGamePacket = packet as S_GameEnd;
-        GameScene gameScene = Object.FindObjectOfType<GameScene>();
-        if (gameScene != null)
+        GameObject obj = ObjectManager.Instance.FindById(endGamePacket.WinnerId);
+        if (obj.TryGetComponent(out PlayerInfo playerInfo))
         {
-            GameObject obj = ObjectManager.Instance.FindById(endGamePacket.WinnerId);
-            if (obj.TryGetComponent(out PlayerInfo playerInfo))
-            {
-                string winnerName = playerInfo.UserName;
-                gameScene.OnGameEnd(winnerName);
-            }
+            string winnerName = playerInfo.UserName;
+            RoomManager.Instance.OnGameEnd(winnerName);
         }
     }
 }

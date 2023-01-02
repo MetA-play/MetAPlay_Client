@@ -1,10 +1,14 @@
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
+    public GameObject WaitingRoom;
+    public GameObject GameMap;
 
     static RoomManager instance;
     public static RoomManager Instance { get { return instance; } }
@@ -18,7 +22,8 @@ public class RoomManager : MonoBehaviour
                     break;
                 case GameState.Playing:
                     // 게임에 따른 맵 소환
-                    Debug.Log("Game Start");
+                    WaitingRoom.SetActive(false);
+                    GameMap.SetActive(true);
                     break;
                 case GameState.Ending:
                     // 결과 추가
@@ -32,45 +37,55 @@ public class RoomManager : MonoBehaviour
         } 
     }
 
+    private TMP_Text winnerUI;
+    private bool isStarted = false;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
-    
     }
+
     void Start()
     {
         NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoom.Id);
         Setting = NetworkManager.Instance.JoinedRoom.Setting;
+
+        GameObject gameMap = Resources.Load<GameObject>($"Prefabs/Game/{Setting.GameType.ToString()}");
+        GameMap = Instantiate(gameMap);
+        GameMap.SetActive(false);
+        winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
     }
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R) && !isStarted)
+        {
+            isStarted = true;
+            GameStart();
+        }
     }
 
-
-    /// <summary>
-    /// 2022. 12. 22. / Eunseong
-    /// 게임 시작 함수
-    /// </summary>
-    void StartGame()
+    public void GameStart()
     {
-        C_UpdateGameStateReq req = new C_UpdateGameStateReq();
-        req.State = GameState.Playing;
-
-        NetworkManager.Instance.Send(req);
+        // 게임 시작 패킷 전송
+        C_UpdateGameStateReq gameStatePacket = new C_UpdateGameStateReq();
+        gameStatePacket.State = GameState.Playing;
+        NetworkManager.Instance.Send(gameStatePacket);
     }
 
-
-    /// <summary>
-    /// 2022. 12. 22 / Eunseong
-    /// 버튼이벤트를 위한 함수
-    /// </summary>
-    public void OnStartGame()
+    public void OnGameEnd(string winner)
     {
-        StartGame();
+        winnerUI.text = $"{winner} 승리!";
+        winnerUI.gameObject.SetActive(true);
+        StartCoroutine(GoLobby());
+    }
+
+    private IEnumerator GoLobby()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Lobby");
     }
 }
