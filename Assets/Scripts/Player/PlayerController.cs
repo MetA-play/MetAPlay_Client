@@ -4,6 +4,7 @@ using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
@@ -262,8 +263,12 @@ public class PlayerController : NetworkingObject
         }
         else
         {
-            verticalVelocity = 0f;
-            JumpAndGravity();
+            if (!jump)
+            {
+                jump = true;
+                verticalVelocity = 0f;
+                JumpAndGravity();
+            }
         }
     }
 
