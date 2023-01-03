@@ -130,6 +130,8 @@ public class PlayerController : NetworkingObject
     /// 2022. 12. 26. / 은성
     /// 플레이어의 input 값을 받아 inputFlag에 비트단위로 넣어 input값이 달라졌을 시 서버에게 input값을 보냄
     /// </summary>
+    int jumpFlag;
+    bool isDiff;
     void InputFunc()
     {
         // MOVE
@@ -137,24 +139,13 @@ public class PlayerController : NetworkingObject
         int YInput = (movementY > 0) ? 1 : (movementY < 0) ? 2 : 0;
         int x = XInput << 27;
         int y = YInput << 23;
-        int jump;
 
         inputFlag = 0;
         inputFlag = inputFlag | x;
         inputFlag = inputFlag | y;
-        bool isDiff = prev_inputFlag != inputFlag || rotY != cam.transform.eulerAngles.y;
-        
-        
-        // JUMP
-        if (Input.GetKeyDown(KeyCode.Space))
-        { 
-            jump = 1 << 22;
-            isDiff = true;
-        }
-        else
-            jump = 0;
+        isDiff = prev_inputFlag != inputFlag || rotY != cam.transform.eulerAngles.y;
 
-        inputFlag = inputFlag | jump;
+        inputFlag = inputFlag | jumpFlag;
 
         prev_inputFlag = inputFlag;
         rotY = cam.transform.eulerAngles.y;
@@ -257,6 +248,14 @@ public class PlayerController : NetworkingObject
         {
             if (IsCheckGrounded() && !jump)
             {
+                // JUMP
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    jumpFlag = 1 << 22;
+                    isDiff = true;
+                }
+                else
+                    jumpFlag = 0;
                 verticalVelocity = 0f;
                 JumpAndGravity();
             }
@@ -265,7 +264,6 @@ public class PlayerController : NetworkingObject
         {
             if (!jump)
             {
-                jump = true;
                 verticalVelocity = 0f;
                 JumpAndGravity();
             }
