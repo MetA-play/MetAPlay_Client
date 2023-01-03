@@ -192,4 +192,11 @@ public class PacketHandler
             RoomManager.Instance.OnGameEnd(winnerName);
         }
     }
+
+    public static void S_JumpHandler(PacketSession session, IMessage packet)
+    {
+        S_Jump jumpPacket = packet as S_Jump;
+        GameObject obj = ObjectManager.Instance.FindById(jumpPacket.PlayerId);
+        obj.GetComponent<PlayerController>().onJump();
+    }
 }

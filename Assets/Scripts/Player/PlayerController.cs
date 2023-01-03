@@ -80,13 +80,10 @@ public class PlayerController : NetworkingObject
         if (isMine)
         {
             InputFunc();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && !jump)
             {
-                if (isSit) // 의자에 앉아 있다면
-                {
-                    Stand();
-                }
-                onJump();
+                C_Jump jumpPacket = new C_Jump();
+                NetworkManager.Instance.Send(jumpPacket);
             }
 
             if (IsCheckGrounded()) jump = false;
@@ -242,31 +239,13 @@ public class PlayerController : NetworkingObject
     /// 2022.12.21 / LJ
     /// Space키를 눌렀을 때 실행
     /// </summary>
-    void onJump()
+    public void onJump()
     {
-        if (isMine)
+        if (!jump)
         {
-            if (IsCheckGrounded() && !jump)
-            {
-                // JUMP
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    jumpFlag = 1 << 22;
-                    isDiff = true;
-                }
-                else
-                    jumpFlag = 0;
-                verticalVelocity = 0f;
-                JumpAndGravity();
-            }
-        }
-        else
-        {
-            if (!jump)
-            {
-                verticalVelocity = 0f;
-                JumpAndGravity();
-            }
+            jump = true;
+            verticalVelocity = 0f;
+            JumpAndGravity();
         }
     }
 
@@ -298,7 +277,6 @@ public class PlayerController : NetworkingObject
             Invoke("JumpTimerOut", Time.deltaTime);
             return;
         }
-        jump = true;
         return;
     }
 
@@ -308,12 +286,8 @@ public class PlayerController : NetworkingObject
     /// </summary>
     void SyncPos()
     {
-
         int x = ((inputFlag >> 27) == 1) ? 1: ((inputFlag >> 27) == 2) ? -1 : 0;
         int y = ((inputFlag >> 23 & 0b1111) == 1) ? 1: ((inputFlag >> 23 & 0b1111) == 2) ? -1 : 0;
-        int jump = (inputFlag >> 22 & 0b1);
-        if (jump > 0)
-            onJump();
         Movement(x, y, rotY);
     }
 

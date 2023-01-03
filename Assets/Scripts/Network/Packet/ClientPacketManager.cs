@@ -48,7 +48,9 @@ class PacketManager
 		_onRecv.Add((ushort)MsgId.SPlayerDead, MakePacket<S_PlayerDead>);
 		_handler.Add((ushort)MsgId.SPlayerDead, PacketHandler.S_PlayerDeadHandler);		
 		_onRecv.Add((ushort)MsgId.SGameEnd, MakePacket<S_GameEnd>);
-		_handler.Add((ushort)MsgId.SGameEnd, PacketHandler.S_GameEndHandler);
+		_handler.Add((ushort)MsgId.SGameEnd, PacketHandler.S_GameEndHandler);		
+		_onRecv.Add((ushort)MsgId.SJump, MakePacket<S_Jump>);
+		_handler.Add((ushort)MsgId.SJump, PacketHandler.S_JumpHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
