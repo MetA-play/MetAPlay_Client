@@ -6,12 +6,13 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using Google.Protobuf.Protocol;
 
-[System.Serializable] public class RoomButtonSelect : UnityEvent<GameKinds> { };
+[System.Serializable] public class RoomButtonSelect : UnityEvent<GameType> { };
 
 public class RoomButton : MonoBehaviour,IPointerClickHandler
 {
-    public GameKinds kind = GameKinds.Preparing;
+    public GameType GameName;
 
     public RoomButtonSelect selectEvent;
 
@@ -51,9 +52,9 @@ public class RoomButton : MonoBehaviour,IPointerClickHandler
     /// 2022.12.30 / LJ
     /// 어떤 버튼이 선택 됬을 때 실행
     /// </summary>
-    public void AnyButtonSelected(GameKinds gameKind)
+    public void AnyButtonSelected(GameType gameType)
     {
-        if (kind == gameKind) // 선택된게 버튼이랑 같을때
+        if (GameName == gameType) // 선택된게 버튼이랑 같을때
         {
             isSelected = true;
             selectedImage.gameObject.SetActive(true);
@@ -79,7 +80,7 @@ public class RoomButton : MonoBehaviour,IPointerClickHandler
 
         for (int i = 0; i < parent.childCount; i++)
         {
-            parent.GetChild(i).GetComponent<RoomButton>().selectEvent.Invoke(kind);
+            parent.GetChild(i).GetComponent<RoomButton>().selectEvent.Invoke(GameName);
         }
     }
 }

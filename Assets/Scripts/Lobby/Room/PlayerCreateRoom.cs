@@ -84,7 +84,7 @@ public class PlayerCreateRoom : MonoBehaviour
         RoomSetting setting = new RoomSetting();
         setting.MaxPlayer = 8;
         setting.Name = roomNameInputField.text;
-        setting.GameType = (GameType)((int)selectedButton.kind);
+        setting.GameType = selectedButton.GameName;
         NetworkManager.Instance.CreateRoom(setting);
         /*GameObject obj = Instantiate(gameRooms[(int)selectedButton.kind]);
         obj.transform.position = new Vector3(playerCam.transform.position.x, -2.5f, playerCam.transform.position.z);

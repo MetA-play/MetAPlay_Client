@@ -14,10 +14,6 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance { get { return instance; } }
     public RoomSetting Setting;
 
-    public GameObject AvoidLogMap;
-    public GameObject DoNotFallMap;
-    public GameObject SpeedRunMap;
-
     GameState state;
     public GameState State { get { return state; } set
         {
@@ -27,10 +23,7 @@ public class RoomManager : MonoBehaviour
                     break;
                 case GameState.Playing:
                     // 게임에 따른 맵 소환
-                    Instantiate(DoNotFallMap);
-                    WaitingRoom.SetActive(false);
-                    winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
-                    winnerUI.gameObject.SetActive(false);
+                    OnGameStart();
                     break;
                 case GameState.Ending:
                     // 결과 추가
@@ -58,16 +51,25 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
         NetworkManager.Instance.JoinRoom(NetworkManager.Instance.JoinedRoom.Id);
-        Setting = NetworkManager.Instance.JoinedRoom.Setting;
-        Debug.Log(Setting.GameType.ToString());
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isStarted)
+        if (Input.GetKeyDown(KeyCode.R) && !isStarted && Setting != null)
         {
             isStarted = true;
             GameStart();
+        }
+    }
+
+    public void OnRoomInfoUpdate()
+    {
+        Setting = NetworkManager.Instance.JoinedRoom.Setting;
+
+        if (GameMap == null)
+        {
+            GameMap = Instantiate(Resources.Load<GameObject>($"Prefabs/Game/{Setting.GameType}"));
+            GameMap.SetActive(false);
         }
     }
 
@@ -77,6 +79,14 @@ public class RoomManager : MonoBehaviour
         C_UpdateGameStateReq gameStatePacket = new C_UpdateGameStateReq();
         gameStatePacket.State = GameState.Playing;
         NetworkManager.Instance.Send(gameStatePacket);
+    }
+
+    public void OnGameStart()
+    {
+        WaitingRoom.SetActive(false);
+        GameMap.SetActive(true);
+        winnerUI = GameObject.Find("Winner Text").GetComponent<TMP_Text>();
+        winnerUI.gameObject.SetActive(false);
     }
 
     public void OnGameEnd(string winner)

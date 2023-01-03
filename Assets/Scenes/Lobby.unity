@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5493344, g: 0.7941628, b: 0.9733974, a: 1}
+  m_IndirectSpecularColor: {r: 0.54935646, g: 0.7941612, b: 0.9733915, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3a465310a92db48997f69dcab7b11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 0
+  GameName: 0
   selectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4639,7 +4639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3a465310a92db48997f69dcab7b11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 1
+  GameName: 2
   selectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5038,7 +5038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3a465310a92db48997f69dcab7b11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 0
+  GameName: 3
   selectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -11720,7 +11720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3a465310a92db48997f69dcab7b11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 0
+  GameName: 1
   selectEvent:
     m_PersistentCalls:
       m_Calls:

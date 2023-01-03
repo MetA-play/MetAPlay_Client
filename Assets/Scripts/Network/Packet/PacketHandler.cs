@@ -39,6 +39,7 @@ public class PacketHandler
         ServerSession SS = session as ServerSession;
         S_JoinRoomRes res = packet as S_JoinRoomRes;
         NetworkManager.Instance.JoinedRoom = res.Info;
+        RoomManager.Instance.OnRoomInfoUpdate();
     }
     /// <summary>
     /// 2022. 12. 20. / Eunseong
@@ -183,6 +184,7 @@ public class PacketHandler
     public static void S_GameEndHandler(PacketSession session, IMessage packet)
     {
         S_GameEnd endGamePacket = packet as S_GameEnd;
+        RoomManager.Instance.State = GameState.Ending;
         GameObject obj = ObjectManager.Instance.FindById(endGamePacket.WinnerId);
         if (obj.TryGetComponent(out PlayerInfo playerInfo))
         {

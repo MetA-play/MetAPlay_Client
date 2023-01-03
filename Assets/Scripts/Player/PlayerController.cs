@@ -319,14 +319,20 @@ public class PlayerController : NetworkingObject
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        if (!isMine) return;
+
         if (hit.gameObject.TryGetComponent(out FloorBlock floorBlock))
         {
             floorBlock.OnCollisionPlayer();
         }
         else if (hit.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            Debug.Log("Collide");
             C_CollideObstacle collidePacket = new C_CollideObstacle();
+            NetworkManager.Instance.Send(collidePacket);
+        }
+        else if (hit.gameObject.layer == LayerMask.NameToLayer("EndLine"))
+        {
+            C_CollideEndLine collidePacket = new C_CollideEndLine();
             NetworkManager.Instance.Send(collidePacket);
         }
     }
