@@ -4,6 +4,7 @@ using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -252,17 +253,17 @@ public class PlayerController : NetworkingObject
     /// </summary>
     void onJump()
     {
-        if (isMine)
+        if (!jump) // 점프가 가능 하다면
         {
-            if (IsCheckGrounded() && !jump) // 점프가 가능 하다면
+            if (isMine)
             {
-                verticalVelocity = 0f;
-                JumpAndGravity();
+                if (IsCheckGrounded())
+                {
+                    verticalVelocity = 0f;
+                    JumpAndGravity();
+                }
             }
-        }
-        else
-        {
-            if (!jump) // 점프가 가능 하다면
+            else
             {
                 verticalVelocity = 0f;
                 JumpAndGravity();
