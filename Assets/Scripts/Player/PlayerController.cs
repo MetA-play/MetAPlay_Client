@@ -311,10 +311,10 @@ public class PlayerController : NetworkingObject
 
         int x = ((inputFlag >> 27) == 1) ? 1: ((inputFlag >> 27) == 2) ? -1 : 0;
         int y = ((inputFlag >> 23 & 0b1111) == 1) ? 1: ((inputFlag >> 23 & 0b1111) == 2) ? -1 : 0;
-        Movement(x, y, rotY);
         int jump = (inputFlag >> 22 & 0b1);
         if (jump > 0)
             onJump();
+        Movement(x, y, rotY);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
