@@ -252,21 +252,18 @@ public class PlayerController : NetworkingObject
     /// </summary>
     void onJump()
     {
-        if (!jump) // 점프가 가능 하다면
+        if (isMine)
         {
-            if (isMine)
-            {
-                if (IsCheckGrounded())
-                {
-                    verticalVelocity = 0f;
-                    JumpAndGravity();
-                }
-            }
-            else
+            if (IsCheckGrounded() && !jump)
             {
                 verticalVelocity = 0f;
                 JumpAndGravity();
             }
+        }
+        else
+        {
+            verticalVelocity = 0f;
+            JumpAndGravity();
         }
     }
 
