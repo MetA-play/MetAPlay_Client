@@ -88,14 +88,13 @@ public class PlayerController : NetworkingObject
                 onJump();
             }
 
+            if (IsCheckGrounded()) jump = false;
+            else jump = true;
         }
-        if (!isMine)
+        else
         {
             SyncPos();
         }
-
-        if (IsCheckGrounded()) jump = false;
-        else jump = true;
     }
 
     private void FixedUpdate()
