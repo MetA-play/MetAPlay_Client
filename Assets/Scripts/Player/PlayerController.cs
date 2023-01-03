@@ -241,12 +241,8 @@ public class PlayerController : NetworkingObject
     /// </summary>
     public void onJump()
     {
-        if (!jump)
-        {
-            jump = true;
-            verticalVelocity = 0f;
-            JumpAndGravity();
-        }
+        verticalVelocity = 0f;
+        JumpAndGravity();
     }
 
     /// <summary>
