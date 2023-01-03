@@ -75,10 +75,6 @@ public class PacketHandler
         {
             ObjectManager.Instance.Add(obj);
         }
-
-        GameScene gs = Object.FindObjectOfType<GameScene>();
-        if (gs != null)
-            gs.Init();
     }
     /// <summary>
     /// 2022. 12. 20. / Eunseong
